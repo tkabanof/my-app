@@ -7,9 +7,9 @@ const Posts = () => {
     return(
         <div className = {s.content}>
             <AddNew/>
-            <Post message = 'You'/>
-            <Post/>
-            <Post/>
+            <Post message = 'Lorem ipsum dolor sit amet' likes = '10'/>
+            <Post message = 'But I must explain to you how all this mistaken idea' likes = '20'/>
+            <Post message = 'On the other hand, we denounce with' likes = '52'/>
         </div>
     )
 }

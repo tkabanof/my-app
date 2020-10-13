@@ -4,3 +4,42 @@
 .item img {
     width: 5%;
 }
+:root {
+    --heart-width: 10px;
+    --heart--height: 17px;
+}
+
+.heart {
+    position: relative;
+    width: var(--heart-width);
+    height: var(--heart--height);
+    background-color: red;
+    box-shadow: -1px 0px 2px #444;  
+    -webkit-border-radius: 50px 50px 0 0;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+  /* Определяем угол наклона */
+    -webkit-transform: rotate(315deg);
+    -moz-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    transform: rotate(315deg);
+  }
+  /* Формируем правую часть */
+  .heart:before {
+    position: absolute;
+    width: var(--heart--height);
+    height: var(--heart-width);
+    left: 0;
+    bottom: 0;
+    content: "";
+    background-color: red;
+    box-shadow: 0px 3px 3px #444444; 
+    -webkit-border-radius: 50px 50px 0 0;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 0 50px 50px 0;
+  }
+  /* Убираем тень при наведении */
+  .heart:hover:before, .heart:hover{
+      box-shadow:none;
+  }
