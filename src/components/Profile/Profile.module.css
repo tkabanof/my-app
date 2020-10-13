@@ -2,6 +2,7 @@
     grid-area: c;
     background-color: aqua;
 }
-.posts {
-    color: brown;
-} 
+
+.content img {
+    width: 30%;
+}
