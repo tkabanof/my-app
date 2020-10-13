@@ -7,7 +7,7 @@ const Posts = () => {
     return(
         <div className = {s.content}>
             <AddNew/>
-            <Post/>
+            <Post message = 'You'/>
             <Post/>
             <Post/>
         </div>
