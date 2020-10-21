@@ -1,7 +1,19 @@
 .item {
-    color: black;
-}
 
+
+    background: #007E3E; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    padding: 10px; /* Поля вокруг текста */
+    border-radius: 5px; /* Для современных браузеров */
+    padding: 1%;
+    margin-top: 5px;
+}
+.userAva{
+
+}
+.message{
+
+}
 .item img {
     width: 5%;
 }
