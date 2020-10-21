@@ -1,3 +1,11 @@
 .content {
-background-color: salmon;
+    background-color: salmon;
+    padding: 10px;
+    margin-top: 10px;
 }
+
+.postsArea{
+    padding: 10px;
+}
+
+
