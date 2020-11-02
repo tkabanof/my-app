@@ -1,0 +1,43 @@
+
+.item {
+    display: grid;
+    grid-template-areas:
+    "head head"
+    "pic text"
+    "foo foo";
+    /*grid-template-rows: 5% 60% 35%;*/
+    grid-template-rows: 0.5fr 4fr 1fr;
+    grid-template-columns: 10% 90%;
+
+    flex-basis: 100%;
+    max-width: 100%;
+    border: 1px solid rgb(97, 245, 245);
+    margin: auto;
+    color: #000000;
+
+    padding: 1em;
+    background-color: #bbd9e3;
+    box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
+}
+
+.userAva {
+    grid-area: pic;
+    padding: 5px;
+
+}
+
+.userAva img {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+}
+
+
+.name {
+    grid-area: text;
+    margin-left: 15px;
+
+}
+
+

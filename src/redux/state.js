@@ -1,15 +1,19 @@
 let state = {
+
     profile: {
         posts: [
             {message: 'Lorem ipsum dolor sit amet', likes: 15},
             {message: 'But I must explain to you how all this mistaken idea', likes: 45},
             {message: 'On the other hand, we denounce with', likes: 1},
-        ],
-        friends: [
+        ]
+
+    },
+    friends: {
+        friendslist: [
             {name: 'Dima', birthday: '2000-01-01'},
             {name: 'Tim', birthday: '1900-05-15'},
             {name: 'Tanya', birthday: '2010-12-31'}
-        ]
+        ],
     },
     dialogsState: {
         dialogs: [
