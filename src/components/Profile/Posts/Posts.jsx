@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Posts.module.css'
 import Post from './Post/Post'
 
-const AddNew = () => {
+const AddNew = (props) => {
     return (
         <div className={s.postsArea}>
             <h2>My Posts</h2>
@@ -16,15 +16,10 @@ const AddNew = () => {
     )
 }
 
-let posts = [
-    {message: 'Lorem ipsum dolor sit amet', likes: 15},
-    {message: 'But I must explain to you how all this mistaken idea', likes: 45},
-    {message: 'On the other hand, we denounce with', likes: 1},
-]
+const Posts = (props) => {
 
-let postsElemets = posts.map( p => <Post message={p.message} likes={p.likes}/>)
+    let postsElemets = props.posts.map(p => <Post message={p.message} likes={p.likes}/>)
 
-const Posts = () => {
     return (
         <div>
             <AddNew/>
@@ -34,6 +29,5 @@ const Posts = () => {
         </div>
     )
 }
-
 
 export default Posts;
