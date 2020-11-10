@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../render";
+
 let state = {
 
     profile: {
@@ -28,5 +30,7 @@ let state = {
         ]
     }
 }
+
+renderEntireTree(state);
 
 export default state;
