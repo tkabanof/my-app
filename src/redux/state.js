@@ -7,7 +7,8 @@ let state = {
             {message: 'Lorem ipsum dolor sit amet', likes: 15},
             {message: 'But I must explain to you how all this mistaken idea', likes: 45},
             {message: 'On the other hand, we denounce with', likes: 1},
-        ]
+        ],
+        newPostText: 'New Post'
 
     },
     friends: {
@@ -31,6 +32,18 @@ let state = {
     }
 }
 
-renderEntireTree(state);
+export let addPost = (newPostText) => {
+    let newPost = {
+        id: 5,
+        message: state.profile.newPostText,
+        likes: 1
+    }
+    state.profile.posts.push(newPost)
+    renderEntireTree(state);
+}
+export let updateNewPostText = (newText) => {
+    state.profile.newPostText = newText;
+    renderEntireTree(state);
+}
 
 export default state;
