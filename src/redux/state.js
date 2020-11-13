@@ -36,21 +36,24 @@ let store = {
     _callSubsriber() {
         console.log('rerender')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profile.newPostText,
-            likes: 1
-        }
-        this._state.profile.posts.push(newPost)
-        this._callSubsriber(this._state);
-    },
-    updateNewPostText(newText) {
-        this._state.profile.newPostText = newText;
-        this._callSubsriber(this._state);
-    },
     subscribe(observer) {
         this._callSubsriber = observer;
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profile.newPostText,
+                likes: 1
+            }
+            this._state.profile.posts.push(newPost)
+            this._callSubsriber(this._state);
+        }
+        if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profile.newPostText = action.newText;
+            this._callSubsriber(this._state);
+        }
     }
 
 }

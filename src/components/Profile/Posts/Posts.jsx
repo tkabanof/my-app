@@ -9,13 +9,13 @@ const AddNew = (props) => {
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
 
     }
 
     let addNewPost = () => {
-        props.addPost();
-        props.updateNewPostText('');
+        props.dispatch({type: 'ADD-POST'})
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: ''})
     }
 
     return (
@@ -44,8 +44,7 @@ const Posts = (props) => {
         <div>
             <AddNew
                 addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
-                newPostText={props.newPostText}
+                dispatch={props.dispatch}
             />
             <div className={s.content}>
                 {postsElemets}
