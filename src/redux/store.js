@@ -2,7 +2,6 @@ import profileReducer from "./profile-reducer";
 
 let store = {
     _state: {
-
         profile: {
             posts: [
                 {message: 'Lorem ipsum dolor sit amet', likes: 15},
@@ -36,14 +35,13 @@ let store = {
         return this._state;
     },
     _callSubsriber() {
-        console.log('rerender')
+        //..
     },
     subscribe(observer) {
         this._callSubsriber = observer;
     },
 
     dispatch(action) {
-
         this._state.profile = profileReducer(this._state.profile, action);
         this._callSubsriber(this._state);
     }

@@ -3,14 +3,12 @@ import s from './Posts.module.css'
 import Post from './Post/Post'
 import {addPostActionCreator, updatenewpostActionCreator} from "../../../redux/profile-reducer";
 
-
 const AddNew = (props) => {
 
     let onPostChange = (e) => {
         let text = e.target.value;
-        let action = updatenewpostActionCreator(text);
-        props.dispatch(action);
-
+        let updatepostaction = updatenewpostActionCreator(text);
+        props.dispatch(updatepostaction);
     }
 
     let addNewPost = () => {
@@ -36,16 +34,14 @@ const AddNew = (props) => {
     )
 }
 
-
 const Posts = (props) => {
-
     let postsElemets = props.posts.map(p => <Post message={p.message} likes={p.likes}/>)
-
     return (
         <div>
             <AddNew
                 addPost={props.addPost}
                 dispatch={props.dispatch}
+                newPostText={props.newPostText}
             />
             <div className={s.content}>
                 {postsElemets}
