@@ -1,3 +1,19 @@
+const UPDATENEWPOSTTEXT = 'UPDATE-NEW-POST-TEXT';
+const ADDPOST = 'ADD-POST';
+
+export const addPostActionCreator = () => {
+    return {
+        type: ADDPOST
+    }
+}
+
+export const updatenewpostActionCreator = (text) => {
+    return {
+        type: UPDATENEWPOSTTEXT,
+        newText: text
+    }
+}
+
 let store = {
     _state: {
 
