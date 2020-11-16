@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Posts.module.css'
 import Post from './Post/Post'
-import {addPostActionCreator, updatenewpostActionCreator} from "../../../redux/state";
+import {addPostActionCreator, updatenewpostActionCreator} from "../../../redux/profile-reducer";
 
 
 const AddNew = (props) => {

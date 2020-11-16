@@ -1,18 +1,4 @@
-const UPDATENEWPOSTTEXT = 'UPDATE-NEW-POST-TEXT';
-const ADDPOST = 'ADD-POST';
-
-export const addPostActionCreator = () => {
-    return {
-        type: ADDPOST
-    }
-}
-
-export const updatenewpostActionCreator = (text) => {
-    return {
-        type: UPDATENEWPOSTTEXT,
-        newText: text
-    }
-}
+import profileReducer from "./profile-reducer";
 
 let store = {
     _state: {
@@ -57,21 +43,9 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 5,
-                message: this._state.profile.newPostText,
-                likes: 1
-            }
-            this._state.profile.posts.push(newPost)
-            this._callSubsriber(this._state);
-        }
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profile.newPostText = action.newText;
-            this._callSubsriber(this._state);
-        }
+
+        this._state.profile = profileReducer(this._state.profile, action);
+        this._callSubsriber(this._state);
     }
-
 }
-
 export default store;
