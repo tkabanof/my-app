@@ -33,10 +33,7 @@ const dialogsReducer = (state = initialStore, action) => {
 
         default:
             return state;
-
     }
-
-    return state;
 }
 export const addMessageActionCreator = () => {
     return {
