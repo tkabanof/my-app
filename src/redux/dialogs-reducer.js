@@ -24,7 +24,6 @@ const dialogsReducer = (state = initialStore, action) => {
                 id: 5,
                 message: state.newMessageText
             }
-            console.log(state.messages);
             state.messages.push(newMessage);
             return state;
         }
