@@ -4,7 +4,6 @@ import Posts from "./Posts";
 
 const PostsContainer = (props) => {
     let state = props.store.getState();
-
     let onPostChange = (text) => {
         props.store.dispatch(updatenewpostActionCreator(text))
     }
