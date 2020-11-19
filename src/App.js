@@ -24,10 +24,8 @@ const App = (props) => {
                                                   newMessageText={props.state.dialogsState.newMessageText}
                            />}/>
                     <Route path="/profile"
-                           render={() => <Profile profiles={props.state.profile}
-                                                  dispatch={props.dispatch}
-
-                           />}/>
+                           render={() => <Profile store={props.store}/>
+                           }/>
                     <Route path="/friends"
                            render={() => <Friends friends={props.state.friends}/>}/>
                     <Route path="/news" component={News}/>
