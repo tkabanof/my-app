@@ -4,7 +4,7 @@ import Post from './Post/Post'
 
 
 const Posts = (props) => {
-    let postsElemets = props.posts.map(p => <Post message={p.message} likes={p.likes}/>)
+    let postsElemets = props.posts.map(p => <Post message={p.message} key={p.id} likes={p.likes}/>)
     let onPostChange = (e) => {
         let text = e.target.value;
         props.onPostChange(text);
