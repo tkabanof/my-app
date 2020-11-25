@@ -7,8 +7,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogContainer";
+import FriendContainer from "./components/Friends/FriendContainer";
 
 const App = (props) => {
     return (
@@ -24,7 +24,7 @@ const App = (props) => {
                            render={() => <Profile store={props.store}/>
                            }/>
                     <Route path="/friends"
-                           render={() => <Friends friends={props.state.friends}/>}/>
+                           render={() => <FriendContainer store={props.store}/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/Music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
