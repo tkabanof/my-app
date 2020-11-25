@@ -72,7 +72,7 @@ const FriendReducer = (state = initialStore, action) => {
             }
         }
         case SET_FRIENDS: {
-            return {...state, friendslist: state.friendslist, ...action.friendslist}
+            return {...state, friendslist: [state.friendslist, ...action.friendslist]}
         }
         default: {
             return state;

@@ -3,8 +3,6 @@ import Friend from "./FriendCard/Friend";
 
 
 const Friends = (props) => {
-    console.log('friends');
-    console.log(props);
 
     let follow = (userid) => {
         props.follow(userid)
