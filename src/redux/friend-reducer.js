@@ -2,37 +2,47 @@ const FOLLOW = 'FOLLOWACTION'
 const UNFOLLOW = 'UNFOLLOW ACTION'
 const SET_FRIENDS = 'SET_FRIENDS'
 
-let initialStore = {
-    friendslist: [
-        {
-            userid: 1,
-            avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
-            name: 'Dima',
-            birthday: '2000-01-01',
-            followed: true
-        }
-        ,
-        {
-            userid: 2,
-            avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
-            name: 'Tim', birthday: '1900-05-15',
-            followed: false
-        },
-        {
-            userid: 3,
-            avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
-            name: 'Tanya',
-            birthday: '2010-12-31',
-            followed: true
-        }
-    ]
-}
+let initialStore =
+    {
+        friendslist: [
+            {
+                userid: 1,
+                avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
+                name: 'Dima',
+                birthday: '2000-01-01',
+                followed: true
+            }
+            ,
+            {
+                userid: 2,
+                avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
+                name: 'Tanya',
+                birthday: '2010-12-31',
+                followed: false
+            }
+            ,
+            {
+                userid: 3,
+                avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
+                name: 'Tim',
+                birthday: '2011-12-31',
+                followed: true
+            }
+            ,
+            {
+                userid: 4,
+                avaLink: 'https://upload.wikimedia.org/wikipedia/ru/c/ca/Terminator_poster.jpg',
+                name: 'Dan',
+                birthday: '2001-02-31',
+                followed: true
+            }
+        ]
+    }
 
 const FriendReducer = (state = initialStore, action) => {
-    console.log(state)
-    console.log(action.type)
     switch (action.type) {
         case FOLLOW: {
+            console.log(action);
             return {
                 ...state,
                 friendslist: state.friendslist.map(u => {
@@ -42,6 +52,7 @@ const FriendReducer = (state = initialStore, action) => {
                             followed: true
                         }
                     }
+                    return u;
                 })
             }
 
@@ -56,6 +67,7 @@ const FriendReducer = (state = initialStore, action) => {
                             followed: false
                         }
                     }
+                    return u;
                 })
             }
         }
