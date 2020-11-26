@@ -42,7 +42,6 @@ let initialStore =
 const FriendReducer = (state = initialStore, action) => {
     switch (action.type) {
         case FOLLOW: {
-            console.log(action);
             return {
                 ...state,
                 friendslist: state.friendslist.map(u => {
@@ -94,10 +93,10 @@ export const unFollowAC = (userid) => {
     }
 }
 
-export const setFriendsAC = (users) => {
+export const setFriendsAC = (friendslist) => {
     return {
         type: SET_FRIENDS,
-        users: users
+        friendslist: friendslist
     }
 }
 
