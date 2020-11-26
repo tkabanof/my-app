@@ -4,32 +4,34 @@ import * as axios from "axios"
 import user_photo from "../../assets/images/userpic.png"
 
 
-const Friends = (props) => {
+class Friends extends React.Component {
 
-    let getUsers = () => {
+    friendItem = {};
+
+    constructor(props) {
+        super(props);
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
-                props.setFriends(response.data.items)
+                this.props.setFriends(response.data.items)
             });
     }
-    let friendItem = props.friends.items.map(m => <Friend key={m.userid}
-                                                          userid={m.id}
-                                                          name={m.name}
-                                                          birthday={"BIRTHDAY"}
-                                                          avaLink={user_photo}
-                                                          followed={m.followed}
-                                                          follow={props.follow}
-                                                          unfollow={props.unfollow}/>)
-    return (
+
+    render() {
+        this.friendItem = this.props.friends.items.map(m => <Friend key={m.id}
+                                                                    userid={m.id}
+                                                                    name={m.name}
+                                                                    birthday={"BIRTHDAY"}
+                                                                    avaLink={user_photo}
+                                                                    followed={m.followed}
+                                                                    follow={this.props.follow}
+                                                                    unfollow={this.props.unfollow}/>)
+        return (
         <div>
             <div>
-                <button onClick={getUsers}>Get Users</button>
-            </div>
-            <div>
-                {friendItem}
+                {this.friendItem}
             </div>
         </div>
-    )
+        )};
 }
 
 export default Friends;
