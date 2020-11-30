@@ -9,7 +9,7 @@ import {
 import React from "react";
 import * as axios from "axios";
 import Friends from "./Friends";
-import preloaderGif from "./../../assets/images/giphy.gif"
+import Preloader from "../common/Preloader/Preloader";
 
 class FriendsComponent extends React.Component {
 
@@ -38,7 +38,7 @@ class FriendsComponent extends React.Component {
 
         return <>
             <div>
-                {this.props.isFEtching ? <img src={preloaderGif}/> : null}</div>
+                {this.props.isFEtching ? <Preloader/> : null}</div>
             <Friends
                 totalUserCount={this.props.totalUserCount}
                 pageSize={this.props.pageSize}
