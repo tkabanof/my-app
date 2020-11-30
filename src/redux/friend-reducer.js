@@ -67,12 +67,12 @@ const FriendReducer = (state = initialStore, action) => {
     }
 }
 
-export const followAC = (id) => ({type: FOLLOW, id})
-export const unFollowAC = (id) => ({type: UNFOLLOW, id})
-export const setFriendsAC = (items) => ({type: SET_FRIENDS, items})
-export const setCurrentPageAC = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
-export const setIsFEtchingAC = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
-export const setUsersTotalCountAC = (totalCount) => {
+export const follow = (id) => ({type: FOLLOW, id})
+export const unFollow = (id) => ({type: UNFOLLOW, id})
+export const setFriends = (items) => ({type: SET_FRIENDS, items})
+export const setCurrentPage = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
+export const setIsFEtching = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
+export const setUsersTotalCount = (totalCount) => {
     return {
         type: SET_TOTAL_COUNT,
         totalUserCount: totalCount

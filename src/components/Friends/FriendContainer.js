@@ -1,15 +1,16 @@
 import {connect} from "react-redux";
-import {
-    followAC,
-    setCurrentPageAC,
-    setFriendsAC, setIsFEtchingAC,
-    setUsersTotalCountAC,
-    unFollowAC
-} from "../../redux/friend-reducer";
 import React from "react";
 import * as axios from "axios";
 import Friends from "./Friends";
 import Preloader from "../common/Preloader/Preloader";
+import {
+    follow,
+    setCurrentPage,
+    setFriends,
+    setIsFEtching,
+    setUsersTotalCount,
+    unFollow
+} from "../../redux/friend-reducer";
 
 class FriendsComponent extends React.Component {
 
@@ -19,7 +20,7 @@ class FriendsComponent extends React.Component {
             .then(response => {
                 this.props.setIsFEtching(false);
                 this.props.setFriends(response.data.items)
-                this.props.setTotalUserCount(response.data.totalCount)
+                this.props.setUsersTotalCount(response.data.totalCount)
             });
     }
 
@@ -30,7 +31,7 @@ class FriendsComponent extends React.Component {
             .then(response => {
                 this.props.setIsFEtching(false);
                 this.props.setFriends(response.data.items)
-                this.props.setTotalUserCount(response.data.totalCount)
+                this.props.setUsersTotalCount(response.data.totalCount)
             });
     }
 
@@ -45,7 +46,7 @@ class FriendsComponent extends React.Component {
                 items={this.props.items}
                 currentPage={this.props.currentPage}
                 follow={this.props.follow}
-                unfollow={this.props.unfollow}
+                unfollow={this.props.unFollow}
                 onPageChanged={this.onPageChanged}
             />
         </>
@@ -62,28 +63,9 @@ let mapStateToProps = (state) => {
         isFEtching: state.friends.isFEtching
     }
 }
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unFollowAC(userId));
-        },
-        setFriends: (friends) => {
-            dispatch(setFriendsAC(friends));
-        },
-        setCurrentPage: (pageNum) => {
-            dispatch(setCurrentPageAC(pageNum));
-        },
-        setTotalUserCount: (totalCount) => {
-            dispatch(setUsersTotalCountAC(totalCount));
-        },
-        setIsFEtching: (isFEtching) => {
-            dispatch(setIsFEtchingAC(isFEtching));
-        }
-    }
-}
-const FriendContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsComponent)
+
+const FriendContainer = connect(mapStateToProps, {
+    follow, unFollow, setFriends, setCurrentPage, setIsFEtching, setUsersTotalCount
+})(FriendsComponent)
 
 export default FriendContainer;
