@@ -2,7 +2,6 @@ import React from 'react';
 import Friend from "./FriendCard/Friend";
 import s from "./Friends.module.css"
 
-
 let Friends = (props) => {
 
 
@@ -16,13 +15,13 @@ let Friends = (props) => {
     }
 
     let friendItem = props.items.map(m => <Friend key={m.id}
-                                                        userid={m.id}
-                                                        name={m.name}
-                                                        birthday={"BIRTHDAY"}
-                                                        avaLink={m.photos.small}
-                                                        followed={m.followed}
-                                                        follow={props.follow}
-                                                        unfollow={props.unfollow}/>)
+                                                  userid={m.id}
+                                                  name={m.name}
+                                                  birthday={"BIRTHDAY"}
+                                                  avaLink={m.photos.small}
+                                                  followed={m.followed}
+                                                  follow={props.follow}
+                                                  unfollow={props.unfollow}/>)
     return (
         <div>
             <div>
@@ -38,8 +37,6 @@ let Friends = (props) => {
             </div>
         </div>
     );
-
 }
-
 
 export default Friends;

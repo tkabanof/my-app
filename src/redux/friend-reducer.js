@@ -3,19 +3,21 @@ const UNFOLLOW = 'UNFOLLOW ACTION'
 const SET_FRIENDS = 'SET_FRIENDS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const SET_IS_FETCHING = 'SET_IS_FETCHING'
 
 let initialStore =
     {
         items: [],
         pageSize: 20,
         totalUserCount: 10,
-        currentPage: 1
+        currentPage: 1,
+        isFEtching: false
     }
 
 const FriendReducer = (state = initialStore, action) => {
 
-    console.log(state)
-    console.log(action)
+    // console.log(state)
+    // console.log(action)
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -55,6 +57,10 @@ const FriendReducer = (state = initialStore, action) => {
         case SET_TOTAL_COUNT: {
             return {...state, totalUserCount: action.totalUserCount}
         }
+        case SET_IS_FETCHING: {
+            return {...state, isFEtching: action.isFEtching}
+        }
+
         default: {
             return state;
         }
@@ -65,6 +71,7 @@ export const followAC = (id) => ({type: FOLLOW, id})
 export const unFollowAC = (id) => ({type: UNFOLLOW, id})
 export const setFriendsAC = (items) => ({type: SET_FRIENDS, items})
 export const setCurrentPageAC = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
+export const setIsFEtchingAC = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
 export const setUsersTotalCountAC = (totalCount) => {
     return {
         type: SET_TOTAL_COUNT,

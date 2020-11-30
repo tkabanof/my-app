@@ -2,30 +2,33 @@ import {connect} from "react-redux";
 import {
     followAC,
     setCurrentPageAC,
-    setFriendsAC,
+    setFriendsAC, setIsFEtchingAC,
     setUsersTotalCountAC,
     unFollowAC
 } from "../../redux/friend-reducer";
 import React from "react";
 import * as axios from "axios";
 import Friends from "./Friends";
+import preloaderGif from "./../../assets/images/giphy.gif"
 
 class FriendsComponent extends React.Component {
 
-    friendItem = {};
-
     componentDidMount() {
+        this.props.setIsFEtching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.setIsFEtching(false);
                 this.props.setFriends(response.data.items)
                 this.props.setTotalUserCount(response.data.totalCount)
             });
     }
 
     onPageChanged = (pageNum) => {
+        this.props.setIsFEtching(true);
         this.props.setCurrentPage(pageNum);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.setIsFEtching(false);
                 this.props.setFriends(response.data.items)
                 this.props.setTotalUserCount(response.data.totalCount)
             });
@@ -33,15 +36,19 @@ class FriendsComponent extends React.Component {
 
     render() {
 
-        return <Friends
-            totalUserCount = { this.props.totalUserCount}
-            pageSize= { this.props.pageSize}
-            items = { this.props.items}
-            currentPage = { this.props.currentPage}
-            follow={ this.props.follow}
-            unfollow={ this.props.unfollow}
-            onPageChanged = {this.onPageChanged}
-        />
+        return <>
+            <div>
+                {this.props.isFEtching ? <img src={preloaderGif}/> : null}</div>
+            <Friends
+                totalUserCount={this.props.totalUserCount}
+                pageSize={this.props.pageSize}
+                items={this.props.items}
+                currentPage={this.props.currentPage}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+                onPageChanged={this.onPageChanged}
+            />
+        </>
     };
 }
 
@@ -51,7 +58,8 @@ let mapStateToProps = (state) => {
         items: state.friends.items,
         pageSize: state.friends.pageSize,
         totalUserCount: state.friends.totalUserCount,
-        currentPage: state.friends.currentPage
+        currentPage: state.friends.currentPage,
+        isFEtching: state.friends.isFEtching
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -70,8 +78,10 @@ let mapDispatchToProps = (dispatch) => {
         },
         setTotalUserCount: (totalCount) => {
             dispatch(setUsersTotalCountAC(totalCount));
+        },
+        setIsFEtching: (isFEtching) => {
+            dispatch(setIsFEtchingAC(isFEtching));
         }
-
     }
 }
 const FriendContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsComponent)
