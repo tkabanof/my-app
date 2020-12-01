@@ -36,7 +36,6 @@ class FriendsComponent extends React.Component {
     }
 
     render() {
-
         return <>
             <div>
                 {this.props.isFEtching ? <Preloader/> : null}</div>
