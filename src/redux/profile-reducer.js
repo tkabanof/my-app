@@ -53,7 +53,6 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case UPDATENEWPOSTTEXT: {
-            console.log(action.newText)
             return {
                 ...state
                 , newPostText: action.newText
@@ -61,6 +60,9 @@ export const profileReducer = (state = initialState, action) => {
         }
         case SET_IS_FETCHING: {
             return {...state, profileInfoIsFEtching: action.profileInfoIsFEtching}
+        }
+        case SET_PROFILE_INFO: {
+            return {...state, profileInfodata: action.data}
         }
 
         case SET_POSTS : {
