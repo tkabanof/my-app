@@ -11,8 +11,6 @@ let initialStore = {
 const authReducer = (state = initialStore, action) => {
     switch (action.type) {
         case SET_USER_DATA: {
-            console.log(state);
-            console.log(action.data);
             return {
                 ...state,
                 ...action.data,

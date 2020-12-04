@@ -16,7 +16,9 @@ class FriendsComponent extends React.Component {
 
     componentDidMount() {
         this.props.setIsFEtching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.setIsFEtching(false);
                 this.props.setFriends(response.data.items)
