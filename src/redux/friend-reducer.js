@@ -32,7 +32,6 @@ const FriendReducer = (state = initialStore, action) => {
                     return u;
                 })
             }
-
         }
         case UNFOLLOW: {
             return {
