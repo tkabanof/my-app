@@ -4,6 +4,7 @@ const SET_FRIENDS = 'SET_FRIENDS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
+const FOLLOW_IN_PROCESS = 'FOLLOW_IN_PROCESS'
 
 let initialStore =
     {
@@ -11,7 +12,8 @@ let initialStore =
         pageSize: 20,
         totalUserCount: 10,
         currentPage: 1,
-        isFEtching: false
+        isFEtching: false,
+        followInProcess: []
     }
 
 const FriendReducer = (state = initialStore, action) => {
@@ -59,6 +61,14 @@ const FriendReducer = (state = initialStore, action) => {
         case SET_IS_FETCHING: {
             return {...state, isFEtching: action.isFEtching}
         }
+        case FOLLOW_IN_PROCESS: {
+            return {
+                ...state, followInProcess: action.isFEtching
+                    ? [...state.followInProcess, action.userId]
+                    : state.followInProcess.filter(id => id != action.userId)
+
+            }
+        }
 
         default: {
             return state;
@@ -71,6 +81,7 @@ export const unFollow = (id) => ({type: UNFOLLOW, id})
 export const setFriends = (items) => ({type: SET_FRIENDS, items})
 export const setCurrentPage = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
 export const setIsFEtching = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
+export const setFollowInProcess = (isFEtching, userId) => ({type: FOLLOW_IN_PROCESS, isFEtching, userId})
 export const setUsersTotalCount = (totalCount) => {
     return {
         type: SET_TOTAL_COUNT,

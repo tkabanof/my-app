@@ -1,6 +1,7 @@
 import React from 'react';
 import Friend from "./FriendCard/Friend";
 import s from "./Friends.module.css"
+import {setFollowInProcess} from "../../redux/friend-reducer";
 
 let Friends = (props) => {
 
@@ -21,7 +22,10 @@ let Friends = (props) => {
                                                   avaLink={m.photos.small}
                                                   followed={m.followed}
                                                   follow={props.follow}
-                                                  unfollow={props.unfollow}/>)
+                                                  unfollow={props.unfollow}
+                                                  followInProcess={props.followInProcess}
+                                                  setFollowInProcess={props.setFollowInProcess}
+    />)
     return (
         <div>
             <div>

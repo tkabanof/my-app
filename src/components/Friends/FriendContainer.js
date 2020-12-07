@@ -4,7 +4,7 @@ import Friends from "./Friends";
 import Preloader from "../common/Preloader/Preloader";
 import {
     follow,
-    setCurrentPage,
+    setCurrentPage, setFollowInProcess,
     setFriends,
     setIsFEtching,
     setUsersTotalCount,
@@ -48,11 +48,12 @@ class FriendsComponent extends React.Component {
                 follow={this.props.follow}
                 unfollow={this.props.unFollow}
                 onPageChanged={this.onPageChanged}
+                followInProcess={this.props.followInProcess}
+                setFollowInProcess={this.props.setFollowInProcess}
             />
         </>
     };
 }
-
 
 let mapStateToProps = (state) => {
     return {
@@ -60,12 +61,13 @@ let mapStateToProps = (state) => {
         pageSize: state.friends.pageSize,
         totalUserCount: state.friends.totalUserCount,
         currentPage: state.friends.currentPage,
-        isFEtching: state.friends.isFEtching
+        isFEtching: state.friends.isFEtching,
+        followInProcess: state.friends.followInProcess
     }
 }
 
 const FriendContainer = connect(mapStateToProps, {
-    follow, unFollow, setFriends, setCurrentPage, setIsFEtching, setUsersTotalCount
+    follow, unFollow, setFriends, setCurrentPage, setIsFEtching, setUsersTotalCount, setFollowInProcess
 })(FriendsComponent)
 
 export default FriendContainer;
