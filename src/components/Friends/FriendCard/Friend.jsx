@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Friend.module.css'
 import user_photo from "../../../assets/images/userpic.png"
 import {NavLink} from "react-router-dom";
-import {follow, unFollow} from "../../../redux/friend-reducer";
 
 const Friend = (props) => {
 

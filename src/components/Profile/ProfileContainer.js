@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {addPost, setPosts, setProfileInfo, updateNewPost} from "../../redux/profile-reducer";
-import {setIsFEtching} from "../../redux/friend-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
 

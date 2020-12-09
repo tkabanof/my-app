@@ -4,7 +4,6 @@ import s from "./Friends.module.css"
 
 let Friends = (props) => {
 
-
     let pageCount = Math.ceil(props.totalUserCount / props.pageSize);
 
     let pages = [];
