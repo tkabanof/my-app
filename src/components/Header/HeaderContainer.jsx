@@ -6,19 +6,6 @@ import {setUserData} from "../../redux/auth-reducer";
 import {userAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component {
-    // componentDidMount() {
-    //     //this.props.setIsFEtching(true);
-    //     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
-    //         {
-    //             withCredentials: true
-    //         })
-    //         .then(response => {
-    //             if (response.data.resultCode === 0) {
-    //                 let {id, login, email} = response.data.data;
-    //                 this.props.setUserData(id, email, login);
-    //             }
-    //         });
-    // }
 
     componentDidMount() {
         userAPI.authMe().then(response => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import Friend from "./FriendCard/Friend";
 import s from "./Friends.module.css"
-import {setFollowInProcess} from "../../redux/friend-reducer";
 
 let Friends = (props) => {
 
@@ -32,6 +31,7 @@ let Friends = (props) => {
                 {pages.map(p => {
                     return <span className={props.currentPage === p ? s.selectedPage : null}
                                  onClick={(e) => {
+                                     console.log(p);
                                      props.onPageChanged(p)
                                  }}>{p} </span>
                 })}

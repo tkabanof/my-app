@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOWACTION'
 const UNFOLLOW = 'UNFOLLOW ACTION'
 const SET_FRIENDS = 'SET_FRIENDS'
@@ -86,6 +88,18 @@ export const setUsersTotalCount = (totalCount) => {
     return {
         type: SET_TOTAL_COUNT,
         totalUserCount: totalCount
+    }
+}
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFEtching(true));
+        userAPI.getFriends(currentPage, pageSize)
+            .then(data => {
+                dispatch(setIsFEtching(false));
+                dispatch(setFriends(data.items));
+                dispatch(setUsersTotalCount(data.totalCount));
+            });
     }
 }
 

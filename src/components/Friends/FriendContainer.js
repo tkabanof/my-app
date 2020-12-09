@@ -3,37 +3,20 @@ import React from "react";
 import Friends from "./Friends";
 import Preloader from "../common/Preloader/Preloader";
 import {
-    follow,
+    follow, getUsers,
     setCurrentPage, setFollowInProcess,
-    setFriends,
-    setIsFEtching,
-    setUsersTotalCount,
     unFollow
 } from "../../redux/friend-reducer";
-import {userAPI} from "../../api/api";
-
 
 class FriendsComponent extends React.Component {
 
     componentDidMount() {
-        this.props.setIsFEtching(true);
-        userAPI.getFriends(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setIsFEtching(false);
-                this.props.setFriends(data.items)
-                this.props.setUsersTotalCount(data.totalCount)
-            });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNum) => {
-        this.props.setIsFEtching(true);
         this.props.setCurrentPage(pageNum);
-        userAPI.getFriends(pageNum, this.props.pageSize)
-            .then(data => {
-                this.props.setIsFEtching(false);
-                this.props.setFriends(data.items)
-                this.props.setUsersTotalCount(data.totalCount)
-            });
+        this.props.getUsers(pageNum, this.props.pageSize);
     }
 
     render() {
@@ -67,7 +50,9 @@ let mapStateToProps = (state) => {
 }
 
 const FriendContainer = connect(mapStateToProps, {
-    follow, unFollow, setFriends, setCurrentPage, setIsFEtching, setUsersTotalCount, setFollowInProcess
+    follow, unFollow,
+    setCurrentPage,
+    setFollowInProcess, getUsers
 })(FriendsComponent)
 
 export default FriendContainer;
