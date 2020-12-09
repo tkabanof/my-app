@@ -2,8 +2,7 @@ import React from 'react';
 import s from './Friend.module.css'
 import user_photo from "../../../assets/images/userpic.png"
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../../../api/api";
-import {setFollowInProcess} from "../../../redux/friend-reducer";
+import {follow, unFollow} from "../../../redux/friend-reducer";
 
 const Friend = (props) => {
 
@@ -17,26 +16,10 @@ const Friend = (props) => {
             <div className={s.followButton}>
                 {props.followed
                     ? <button disabled={props.followInProcess.some(id => id === props.id)} onClick={() => {
-                        props.setFollowInProcess(true, props.userid);
-                        userAPI.unfollow(props.userid)
-                            .then(data => {
-                                if (data.resultCode === 0) {
-                                    props.unfollow(props.userid);
-                                    props.setFollowInProcess(false, props.userid);
-                                }
-                            });
-
+                        props.unFollow(props.userid);
                     }}>Unfollow</button>
                     : <button disabled={props.followInProcess.some(id => id === props.userid)} onClick={() => {
-                        props.setFollowInProcess(true, props.userid);
-                        userAPI.follow(props.userid)
-                            .then(data => {
-                                if (data.resultCode === 0) {
-                                    props.follow(props.userid);
-                                    props.setFollowInProcess(false, props.userid);
-                                }
-                            });
-
+                        props.follow(props.userid);
                     }}>Follow</button>}
             </div>
             <div className={s.name}>

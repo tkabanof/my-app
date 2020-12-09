@@ -21,7 +21,7 @@ let Friends = (props) => {
                                                   avaLink={m.photos.small}
                                                   followed={m.followed}
                                                   follow={props.follow}
-                                                  unfollow={props.unfollow}
+                                                  unFollow={props.unFollow}
                                                   followInProcess={props.followInProcess}
                                                   setFollowInProcess={props.setFollowInProcess}
     />)
@@ -31,7 +31,6 @@ let Friends = (props) => {
                 {pages.map(p => {
                     return <span className={props.currentPage === p ? s.selectedPage : null}
                                  onClick={(e) => {
-                                     console.log(p);
                                      props.onPageChanged(p)
                                  }}>{p} </span>
                 })}

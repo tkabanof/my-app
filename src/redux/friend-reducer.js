@@ -77,9 +77,9 @@ const FriendReducer = (state = initialStore, action) => {
         }
     }
 }
-
-export const follow = (id) => ({type: FOLLOW, id})
-export const unFollow = (id) => ({type: UNFOLLOW, id})
+//Экшены ==========================================================
+export const followAC = (id) => ({type: FOLLOW, id})
+export const unFollowAC = (id) => ({type: UNFOLLOW, id})
 export const setFriends = (items) => ({type: SET_FRIENDS, items})
 export const setCurrentPage = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
 export const setIsFEtching = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
@@ -90,7 +90,7 @@ export const setUsersTotalCount = (totalCount) => {
         totalUserCount: totalCount
     }
 }
-
+//Санки ===========================================================
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setIsFEtching(true));
@@ -99,6 +99,31 @@ export const getUsers = (currentPage, pageSize) => {
                 dispatch(setIsFEtching(false));
                 dispatch(setFriends(data.items));
                 dispatch(setUsersTotalCount(data.totalCount));
+            });
+    }
+}
+
+export const follow = (userid) => {
+    return (dispatch) => {
+        dispatch(setFollowInProcess(true, userid));
+        userAPI.follow(userid)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followAC(userid));
+                    dispatch(setFollowInProcess(false, userid));
+                }
+            });
+    }
+}
+export const unFollow = (userid) => {
+    return (dispatch) => {
+        dispatch(setFollowInProcess(true, userid));
+        userAPI.unfollow(userid)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unFollowAC(userid));
+                    dispatch(setFollowInProcess(false, userid));
+                }
             });
     }
 }

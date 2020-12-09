@@ -29,10 +29,9 @@ class FriendsComponent extends React.Component {
                 items={this.props.items}
                 currentPage={this.props.currentPage}
                 follow={this.props.follow}
-                unfollow={this.props.unFollow}
+                unFollow={this.props.unFollow}
                 onPageChanged={this.onPageChanged}
                 followInProcess={this.props.followInProcess}
-                setFollowInProcess={this.props.setFollowInProcess}
             />
         </>
     };
