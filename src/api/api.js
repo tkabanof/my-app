@@ -32,6 +32,10 @@ export const userAPI = {
         return instanceAPI.get(`/auth/me`).then(response => {
             return response.data;
         })
+    },
+    getUserProfileData(userid) {
+        return instanceAPI.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userid).then(response => {
+            return response.data;
+        })
     }
-
 }

@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {addPost, setPosts, setProfileInfo, updateNewPost} from "../../redux/profile-reducer";
-import * as axios from "axios";
 import {setIsFEtching} from "../../redux/friend-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
@@ -14,12 +13,7 @@ class ProfileComponent extends React.Component {
         if (!userId) {
             userId = 2;
         }
-        this.props.setIsFEtching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setIsFEtching(false);
-                this.props.setProfileInfo(response.data)
-            });
+        this.props.setProfileInfo(userId);
     }
 
     render() {
@@ -49,7 +43,7 @@ let mapStateToProps = (state) => {
 }
 
 const ProfileContainer = connect(mapStateToProps, {
-    addPost, updateNewPost, setPosts, setProfileInfo, setIsFEtching
+    addPost, updateNewPost, setPosts, setProfileInfo
 })(withRouter(ProfileComponent))
 
 export default ProfileContainer;

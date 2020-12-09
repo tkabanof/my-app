@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const UPDATENEWPOSTTEXT = 'UPDATE-NEW-POST-TEXT';
 const ADDPOST = 'ADD-POST';
 const SET_POSTS = 'SET_POSTS'
@@ -45,13 +47,11 @@ export const profileReducer = (state = initialState, action) => {
                 message: state.newPostText,
                 likes: 1
             }
-
             return {
                 ...state,
                 postsItems: [...state.postsItems, newPost],
             };
         }
-
         case UPDATENEWPOSTTEXT: {
             return {
                 ...state
@@ -74,11 +74,20 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-//export const func = (FUNC) => ({type: XXX, FUNC})
 export const addPost = () => ({type: ADDPOST})
 export const updateNewPost = (newText) => ({type: UPDATENEWPOSTTEXT, newText})
 export const setPosts = (posts) => ({type: SET_POSTS, posts})
-export const setProfileInfo = (data) => ({type: SET_PROFILE_INFO, data})
+export const setProfileInfoAC = (data) => ({type: SET_PROFILE_INFO, data})
 export const setIsFEtching = (profileInfoIsFEtching) => ({type: SET_IS_FETCHING, profileInfoIsFEtching})
+
+export const setProfileInfo = (uesrid) => {
+    return (dispatch) => {
+        dispatch(setIsFEtching(true));
+        userAPI.getUserProfileData(uesrid).then(response => {
+            dispatch(setIsFEtching(false));
+            dispatch(setProfileInfoAC(response));
+        });
+    }
+}
 
 export default profileReducer;
