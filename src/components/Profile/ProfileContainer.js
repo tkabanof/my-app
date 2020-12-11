@@ -43,10 +43,9 @@ let mapStateToProps = (state) => {
     }
 }
 
-
 const ProfileContainer = compose(connect(mapStateToProps, {
-    addPost, updateNewPost, setPosts, setProfileInfo
-}), withRouter,
+        addPost, updateNewPost, setPosts, setProfileInfo
+    }), withRouter,
     withAuthRedirect)
 (ProfileComponent)
 
