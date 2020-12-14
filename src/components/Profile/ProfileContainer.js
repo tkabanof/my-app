@@ -1,4 +1,4 @@
-import { Component } from "react";
+import {Component} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {addPost, setPosts, setProfileInfo, updateNewPost} from "../../redux/profile-reducer";
