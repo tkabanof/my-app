@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./ProfileInfo.module.css"
 import user_photo from "../../../assets/images/userpic.png";
 

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import React from "react";
+import { Component } from "react";
 import Friends from "./Friends";
 import Preloader from "../common/Preloader/Preloader";
 import {
@@ -10,7 +10,7 @@ import {
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-class FriendsComponent extends React.Component {
+class FriendsComponent extends Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);

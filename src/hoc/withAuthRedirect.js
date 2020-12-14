@@ -1,5 +1,5 @@
 import {Redirect} from "react-router";
-import React from "react";
+import * as React from "react";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => ({

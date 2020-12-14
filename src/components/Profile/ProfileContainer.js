@@ -1,4 +1,4 @@
-import React from "react";
+import { Component } from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {addPost, setPosts, setProfileInfo, updateNewPost} from "../../redux/profile-reducer";
@@ -7,7 +7,7 @@ import {withRouter} from "react-router";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-class ProfileComponent extends React.Component {
+class ProfileComponent extends Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;

@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {setUserInfo} from "../../redux/auth-reducer";
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends Component {
 
     componentDidMount() {
         this.props.setUserInfo();
