@@ -27,7 +27,7 @@ class Status extends Component {
                 }
                 {this.state.editMode &&
                 <div>
-                    <input  autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status}/>
+                    <input autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status}/>
                 </div>
                 }
             </div>
