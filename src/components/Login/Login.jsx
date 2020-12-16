@@ -1,4 +1,5 @@
 import {Field, reduxForm} from "redux-form";
+import {userAPI} from "../../api/api";
 
 const LoginForm = (props) => {
     return (
@@ -23,11 +24,13 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
 
-
 const Login = (props) => {
 
     const onSubmit = (formData) => {
         console.log(formData)
+        /*userAPI.login(formData.login, formData.password, formData.rememberMe).then((data)=>{
+            data.resultCode === 0 ? alert("Login succes") : alert("login failed")
+        })*/
     }
     return <div>
         <h1>LOGIN</h1>

@@ -33,6 +33,17 @@ export const userAPI = {
             return response.data;
         })
     },
+    login(email, password, remember) {
+        return instanceAPI.post('/auth/login', {
+            email: email,
+            password: password,
+            rememberMe: remember
+
+        }).then(response => {
+            console.log(response.data)
+                return response.data;
+        })
+    },
     getUserProfileData(userid) {
         return instanceAPI.get(`profile/` + userid).then(response => {
             return response.data;

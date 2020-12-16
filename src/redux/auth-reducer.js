@@ -3,11 +3,11 @@ import {userAPI} from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA'
 
 let initialStore = {
-    userid: 1,
+    userid: 2,
     email: null,
     login: null,
     isFetching: null,
-    isAuth: null
+    isAuth: true
 }
 
 const authReducer = (state = initialStore, action) => {
