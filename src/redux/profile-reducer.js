@@ -1,6 +1,5 @@
 import {userAPI} from "../api/api";
 
-const UPDATENEWPOSTTEXT = 'UPDATE-NEW-POST-TEXT';
 const ADDPOST = 'ADD-POST';
 const SET_POSTS = 'SET_POSTS'
 const SET_PROFILE_INFO = 'SET_PROFILE_INFO'
@@ -13,7 +12,6 @@ let initialState = {
         {id: 3, message: 'On the other hand, we denounce with', likes: 1},
     ],
     postsIsFEtching: false,
-    newPostText: 'New Post',
     profileInfodata: {
         "aboutMe": "я круто чувак 1001%",
         "contacts": {
@@ -44,18 +42,12 @@ export const profileReducer = (state = initialState, action) => {
         case ADDPOST: {
             let newPost = {
                 id: 999,
-                message: state.newPostText,
+                message: action.newPostBody,
                 likes: 1
             }
             return {
                 ...state,
                 postsItems: [...state.postsItems, newPost],
-            };
-        }
-        case UPDATENEWPOSTTEXT: {
-            return {
-                ...state
-                , newPostText: action.newText
             };
         }
         case SET_IS_FETCHING: {
@@ -74,8 +66,7 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = () => ({type: ADDPOST})
-export const updateNewPost = (newText) => ({type: UPDATENEWPOSTTEXT, newText})
+export const addPost = (newPostBody) => ({type: ADDPOST, newPostBody})
 export const setPosts = (posts) => ({type: SET_POSTS, posts})
 export const setProfileInfoAC = (data) => ({type: SET_PROFILE_INFO, data})
 export const setIsFEtching = (profileInfoIsFEtching) => ({type: SET_IS_FETCHING, profileInfoIsFEtching})
