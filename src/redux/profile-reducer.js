@@ -54,7 +54,7 @@ export const profileReducer = (state = initialState, action) => {
             return {...state, profileInfoIsFEtching: action.profileInfoIsFEtching}
         }
         case SET_PROFILE_INFO: {
-            return {...state, profileInfodata: action.data}
+            return {...state, profileInfodata: action.response.data}
         }
 
         case SET_POSTS : {
@@ -68,7 +68,7 @@ export const profileReducer = (state = initialState, action) => {
 
 export const addPost = (newPostBody) => ({type: ADDPOST, newPostBody})
 export const setPosts = (posts) => ({type: SET_POSTS, posts})
-export const setProfileInfoAC = (data) => ({type: SET_PROFILE_INFO, data})
+export const setProfileInfoAC = (response) => ({type: SET_PROFILE_INFO, response})
 export const setIsFEtching = (profileInfoIsFEtching) => ({type: SET_IS_FETCHING, profileInfoIsFEtching})
 
 export const setProfileInfo = (uesrid) => {

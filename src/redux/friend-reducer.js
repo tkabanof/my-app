@@ -95,10 +95,10 @@ export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setIsFEtching(true));
         userAPI.getFriends(currentPage, pageSize)
-            .then(data => {
+            .then(response => {
                 dispatch(setIsFEtching(false));
-                dispatch(setFriends(data.items));
-                dispatch(setUsersTotalCount(data.totalCount));
+                dispatch(setFriends(response.data.items));
+                dispatch(setUsersTotalCount(response.data.totalCount));
             });
     }
 }
@@ -107,8 +107,8 @@ export const follow = (userid) => {
     return (dispatch) => {
         dispatch(setFollowInProcess(true, userid));
         userAPI.follow(userid)
-            .then(data => {
-                if (data.resultCode === 0) {
+            .then(response => {
+                if (response.data.resultCode === 0) {
                     dispatch(followAC(userid));
                     dispatch(setFollowInProcess(false, userid));
                 }
@@ -119,8 +119,8 @@ export const unFollow = (userid) => {
     return (dispatch) => {
         dispatch(setFollowInProcess(true, userid));
         userAPI.unfollow(userid)
-            .then(data => {
-                if (data.resultCode === 0) {
+            .then(response => {
+                if (response.data.resultCode === 0) {
                     dispatch(unFollowAC(userid));
                     dispatch(setFollowInProcess(false, userid));
                 }

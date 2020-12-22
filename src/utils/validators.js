@@ -12,7 +12,7 @@ export const minValue = min => value =>
 export const minValue13 = minValue(13)
 export const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-        ? 'Invalid email address'
+        ? 'Неправильный email'
         : undefined
 export const tooYoung = value =>
     value && value < 13
