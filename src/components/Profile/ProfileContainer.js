@@ -14,6 +14,7 @@ class ProfileComponent extends Component {
         if (!userId) {
             userId = 2;
         }
+        console.log(userId);
         this.props.setProfileInfo(userId);
     }
 

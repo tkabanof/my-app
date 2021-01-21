@@ -1,38 +1,44 @@
-import {Component} from "react/cjs/react.production.min";
+import s from "./Status.module.css";
+import {useState} from 'react';
 
-class Status extends Component {
+const Status = (props) => {
 
-    state = {
-        editMode: false
-    }
-    activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
-    deActivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
+    const [editMode, setEditMode] = useState(false);
+    const [textStatus, setTextStatus] = useState("This is Test Status!")
+
+
+    const changeStatusText = (e) => {
+        setTextStatus(e.currentTarget.value);
     }
 
-    render() {
-        return (
+    function activateEdit() {
+        setEditMode(true);
+    }
+
+    function disableEdit() {
+        setEditMode(false);
+    }
+
+    return (
+        <div className={s.status}>
+            <p>STATUS</p>
+            {!editMode &&
             <div>
-                <p>STATUSBAR</p>
-                {!this.state.editMode &&
-                <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
-                </div>
-                }
-                {this.state.editMode &&
-                <div>
-                    <input autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status}/>
-                </div>
-                }
+                <span
+                    onDoubleClick={activateEdit}
+                >{"Status " + textStatus}</span>
             </div>
-        )
-    }
-}
+            }
+            {editMode &&
+            <div>
+                <input autoFocus={true}
+                       onBlur={disableEdit}
+                       onChange={changeStatusText}
+                       value={textStatus}/>
+            </div>
+            }
+        </div>
+    )
 
+}
 export default Status;

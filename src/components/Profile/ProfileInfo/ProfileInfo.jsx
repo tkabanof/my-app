@@ -2,11 +2,13 @@ import s from "./ProfileInfo.module.css"
 import user_photo from "../../../assets/images/userpic.png";
 import Status from "../Status/Status";
 
+
 const ProfileInfo = (props) => {
     let p = props.profileInfodata;
-    return (<div>
+    return (
+        <div>
             <p>{p.fullName}</p>
-            <Status status = {"Hello"}/>
+            <Status/>
             <div className={s.profilePicture}>
                 <img
                     src={p.photos.small === null ? user_photo : p.photos.small}/>
@@ -31,7 +33,6 @@ const ProfileInfo = (props) => {
                 </div>
             </div>
             <div>
-
             </div>
         </div>
     )

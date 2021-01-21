@@ -1,0 +1,6 @@
+.status {
+    border: 1px;
+    padding: 5px;
+    border-color: red white;
+    border-style: solid;
+}
