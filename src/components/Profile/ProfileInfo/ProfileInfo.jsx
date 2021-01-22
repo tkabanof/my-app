@@ -8,7 +8,7 @@ const ProfileInfo = (props) => {
     return (
         <div>
             <p>{p.fullName}</p>
-            <Status/>
+            <Status status = {props.profileStatus}/>
             <div className={s.profilePicture}>
                 <img
                     src={p.photos.small === null ? user_photo : p.photos.small}/>

@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {addPost, setPosts, setProfileInfo} from "../../redux/profile-reducer";
+import {addPost, setPosts, setProfileInfo, setProfileStatus} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -14,8 +14,8 @@ class ProfileComponent extends Component {
         if (!userId) {
             userId = 2;
         }
-        console.log(userId);
         this.props.setProfileInfo(userId);
+        this.props.setProfileStatus(userId);
     }
 
     render() {
@@ -28,6 +28,7 @@ class ProfileComponent extends Component {
                 addPost={this.props.addPost}
                 setPosts={this.props.setPosts}
                 profileInfodata={this.props.profileInfodata}
+                profileStatus={this.props.profileStatus}
             />
         </div>
     };
@@ -37,12 +38,13 @@ let mapStateToProps = (state) => {
     return {
         postsItems: state.profile.postsItems,
         postsIsFEtching: state.profile.postsIsFEtching,
-        profileInfodata: state.profile.profileInfodata
+        profileInfodata: state.profile.profileInfodata,
+        profileStatus: state.profile.profileStatus
     }
 }
 
 const ProfileContainer = compose(connect(mapStateToProps, {
-        addPost, setPosts, setProfileInfo
+        addPost, setPosts, setProfileInfo, setProfileStatus,
     }), withRouter,
     withAuthRedirect)
 (ProfileComponent)

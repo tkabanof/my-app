@@ -4,8 +4,7 @@ import {useState} from 'react';
 const Status = (props) => {
 
     const [editMode, setEditMode] = useState(false);
-    const [textStatus, setTextStatus] = useState("This is Test Status!")
-
+    const [textStatus, setTextStatus] = useState(props.status);
 
     const changeStatusText = (e) => {
         setTextStatus(e.currentTarget.value);

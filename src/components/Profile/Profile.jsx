@@ -6,6 +6,7 @@ const Profile = (props) => {
         <div>
             <ProfileInfo
                 profileInfodata={props.profileInfodata}
+                profileStatus = {props.profileStatus}
             />
             <Posts
                 postsItems={props.postsItems}

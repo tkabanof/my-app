@@ -3,6 +3,7 @@ import {userAPI} from "../api/api";
 const ADDPOST = 'ADD-POST';
 const SET_POSTS = 'SET_POSTS'
 const SET_PROFILE_INFO = 'SET_PROFILE_INFO'
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
 
 let initialState = {
@@ -12,6 +13,7 @@ let initialState = {
         {id: 3, message: 'On the other hand, we denounce with', likes: 1},
     ],
     postsIsFEtching: false,
+    profileStatus: "Text Status Example",
     profileInfodata: {
         "aboutMe": "я круто чувак 1001%",
         "contacts": {
@@ -56,11 +58,12 @@ export const profileReducer = (state = initialState, action) => {
         case SET_PROFILE_INFO: {
             return {...state, profileInfodata: action.response.data}
         }
-
+        case SET_PROFILE_STATUS: {
+            return {...state, profileStatus: action.response.data}
+        }
         case SET_POSTS : {
             return {}
         }
-
         default:
             return state;
     }
@@ -69,14 +72,22 @@ export const profileReducer = (state = initialState, action) => {
 export const addPost = (newPostBody) => ({type: ADDPOST, newPostBody})
 export const setPosts = (posts) => ({type: SET_POSTS, posts})
 export const setProfileInfoAC = (response) => ({type: SET_PROFILE_INFO, response})
+export const setProfileStatusAC = (response) => ({type: SET_PROFILE_STATUS, response})
 export const setIsFEtching = (profileInfoIsFEtching) => ({type: SET_IS_FETCHING, profileInfoIsFEtching})
 
-export const setProfileInfo = (uesrid) => {
+export const setProfileInfo = (userid) => {
     return (dispatch) => {
         dispatch(setIsFEtching(true));
-        userAPI.getUserProfileData(uesrid).then(response => {
+        userAPI.getUserProfileData(userid).then(response => {
             dispatch(setIsFEtching(false));
             dispatch(setProfileInfoAC(response));
+        });
+    }
+}
+export const setProfileStatus = (userid) => {
+    return (dispatch) => {
+        userAPI.getUserStatus(userid).then(response => {
+            dispatch(setProfileStatusAC(response));
         });
     }
 }

@@ -12,16 +12,17 @@ export const userAPI = {
     getFriends(currentPage = 1, pageSize = 10) {
         return instanceAPI.get(`users?page=${currentPage}&count=${pageSize}`, {})
     },
-
     follow(userid) {
         return instanceAPI.post(`follow/${userid}`)
     },
     unfollow(userid) {
         return instanceAPI.delete(`follow/${userid}`)
     },
-
     getUserProfileData(userid) {
         return instanceAPI.get(`profile/` + userid)
+    },
+    getUserStatus(userid) {
+        return instanceAPI.get(`profile/status/` + userid)
     }
 }
 export const authAPI = {
@@ -30,7 +31,6 @@ export const authAPI = {
             email: email,
             password: password,
             rememberMe: rememberMe
-
         })
     },
     logOut() {
