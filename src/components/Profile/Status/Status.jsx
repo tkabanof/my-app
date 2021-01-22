@@ -1,10 +1,14 @@
 import s from "./Status.module.css";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const Status = (props) => {
 
     const [editMode, setEditMode] = useState(false);
     const [textStatus, setTextStatus] = useState(props.status);
+
+    useEffect(() => {
+        setTextStatus(props.status);
+    }, [props.status]);
 
     const changeStatusText = (e) => {
         setTextStatus(e.currentTarget.value);
