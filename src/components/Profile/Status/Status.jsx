@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react';
 
 const Status = (props) => {
 
+    console.log('me ' + props.me)
+
     const [editMode, setEditMode] = useState(false);
     const [textStatus, setTextStatus] = useState(props.status);
 
@@ -15,7 +17,9 @@ const Status = (props) => {
     }
 
     function activateEdit() {
-        setEditMode(true);
+        if (props.me) {
+            setEditMode(true);
+        }
     }
 
     function disableEdit() {

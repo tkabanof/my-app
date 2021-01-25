@@ -29,6 +29,7 @@ class ProfileComponent extends Component {
                 setPosts={this.props.setPosts}
                 profileInfodata={this.props.profileInfodata}
                 profileStatus={this.props.profileStatus}
+                me={this.props.loginid}
             />
         </div>
     };
@@ -39,7 +40,8 @@ let mapStateToProps = (state) => {
         postsItems: state.profile.postsItems,
         postsIsFEtching: state.profile.postsIsFEtching,
         profileInfodata: state.profile.profileInfodata,
-        profileStatus: state.profile.profileStatus
+        profileStatus: state.profile.profileStatus,
+        loginid: state.auth.userid
     }
 }
 
