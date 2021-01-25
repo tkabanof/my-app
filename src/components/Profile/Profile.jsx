@@ -8,6 +8,7 @@ const Profile = (props) => {
                 profileInfodata={props.profileInfodata}
                 profileStatus={props.profileStatus}
                 me={props.me}
+                setMyStatus={props.setMyStatus}
             />
             <Posts
                 postsItems={props.postsItems}

@@ -2,15 +2,15 @@ import s from "./ProfileInfo.module.css"
 import user_photo from "../../../assets/images/userpic.png";
 import Status from "../Status/Status";
 
-
 const ProfileInfo = (props) => {
     let p = props.profileInfodata;
-    console.log('MyUserId ' + props.me)
-    console.log('p.id ' + p.userId);
     return (
         <div>
             <p>{p.fullName}</p>
-            <Status status={props.profileStatus} me={(props.me === p.userId)}/>
+            <Status status={props.profileStatus}
+                    me={(props.me === p.userId)}
+                    setMyStatus={props.setMyStatus}
+            />
             <div className={s.profilePicture}>
                 <img
                     src={p.photos.small === null ? user_photo : p.photos.small}/>

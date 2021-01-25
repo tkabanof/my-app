@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {addPost, setPosts, setProfileInfo, setProfileStatus} from "../../redux/profile-reducer";
+import {addPost, setMyStatus, setPosts, setProfileInfo, setProfileStatus} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -29,6 +29,7 @@ class ProfileComponent extends Component {
                 setPosts={this.props.setPosts}
                 profileInfodata={this.props.profileInfodata}
                 profileStatus={this.props.profileStatus}
+                setMyStatus={this.props.setMyStatus}
                 me={this.props.loginid}
             />
         </div>
@@ -46,7 +47,7 @@ let mapStateToProps = (state) => {
 }
 
 const ProfileContainer = compose(connect(mapStateToProps, {
-        addPost, setPosts, setProfileInfo, setProfileStatus,
+        addPost, setPosts, setProfileInfo, setProfileStatus, setMyStatus,
     }), withRouter,
     withAuthRedirect)
 (ProfileComponent)
