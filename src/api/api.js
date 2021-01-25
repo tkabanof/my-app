@@ -24,7 +24,7 @@ export const userAPI = {
     getUserStatus(userid) {
         return instanceAPI.get(`profile/status/` + userid)
     },
-    setMeStatus(statusText){
+    setMeStatus(statusText) {
         return instanceAPI.put(`profile/status`, {status: statusText})
     }
 }

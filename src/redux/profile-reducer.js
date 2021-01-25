@@ -91,5 +91,15 @@ export const setProfileStatus = (userid) => {
         });
     }
 }
+export const setMyStatus = (textStatus) => {
+//Хдесь все ОКЕЙ
+    return (dispatch) => {
+        userAPI.setMeStatus(textStatus).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setProfileStatusAC(textStatus));
+            }
+        });
+    }
+}
 
 export default profileReducer;
