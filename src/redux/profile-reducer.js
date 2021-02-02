@@ -1,6 +1,7 @@
 import {userAPI} from "../api/api";
 
 const ADDPOST = 'ADD-POST';
+const DELETEPOST = 'DELETE_POST';
 const SET_POSTS = 'SET_POSTS'
 const SET_PROFILE_INFO = 'SET_PROFILE_INFO'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
@@ -52,6 +53,12 @@ export const profileReducer = (state = initialState, action) => {
                 postsItems: [...state.postsItems, newPost],
             };
         }
+        case DELETEPOST: {
+            return {
+                ...state,
+                postsItems: [...state.postsItems].filter(post => post.id !== action.postId),
+            };
+        }
         case SET_IS_FETCHING: {
             return {...state, profileInfoIsFEtching: action.profileInfoIsFEtching}
         }
@@ -70,6 +77,7 @@ export const profileReducer = (state = initialState, action) => {
 }
 
 export const addPost = (newPostBody) => ({type: ADDPOST, newPostBody})
+export const deletePost = (postId) => ({type: DELETEPOST, postId})
 export const setPosts = (posts) => ({type: SET_POSTS, posts})
 export const setProfileInfoAC = (response) => ({type: SET_PROFILE_INFO, response})
 export const setProfileStatusAC = (response) => ({type: SET_PROFILE_STATUS, response})
@@ -92,7 +100,6 @@ export const setProfileStatus = (userid) => {
     }
 }
 export const setMyStatus = (textStatus) => {
-//Хдесь все ОКЕЙ
     return (dispatch) => {
         userAPI.setMeStatus(textStatus).then(response => {
             if (response.data.resultCode === 0) {

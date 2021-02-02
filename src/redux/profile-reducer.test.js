@@ -1,4 +1,4 @@
-import profileReducer, {addPost} from "./profile-reducer";
+import profileReducer, {addPost, deletePost} from "./profile-reducer";
 
 let testState = {
     postsItems: [
@@ -40,3 +40,12 @@ it('testAdd', () => {
     // 3 expectation
     expect(newState.postsItems.length).toBe(4);
 });
+it('Deleting Post ', () => {
+    //1. test data
+    let action = deletePost(3);
+    //2. action
+    let newState = profileReducer(testState, action);
+    // 3 expectation
+    expect(newState.postsItems.length).toBe(2);
+});
+
