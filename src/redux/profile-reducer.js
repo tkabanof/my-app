@@ -83,28 +83,20 @@ export const setProfileInfoAC = (response) => ({type: SET_PROFILE_INFO, response
 export const setProfileStatusAC = (response) => ({type: SET_PROFILE_STATUS, response})
 export const setIsFEtching = (profileInfoIsFEtching) => ({type: SET_IS_FETCHING, profileInfoIsFEtching})
 
-export const setProfileInfo = (userid) => {
-    return (dispatch) => {
-        dispatch(setIsFEtching(true));
-        userAPI.getUserProfileData(userid).then(response => {
-            dispatch(setIsFEtching(false));
-            dispatch(setProfileInfoAC(response));
-        });
-    }
+export const setProfileInfo = (userid) => async (dispatch) => {
+    dispatch(setIsFEtching(true));
+    let response = await userAPI.getUserProfileData(userid);
+    dispatch(setProfileInfoAC(response));
+
 }
-export const setProfileStatus = (userid) => async (dispatch) =>{
+export const setProfileStatus = (userid) => async (dispatch) => {
     let response = await userAPI.getUserStatus(userid);
-    if (response.data.resultCode === 0){
-        dispatch(setProfileStatusAC(response));
-    }
+    dispatch(setProfileStatusAC(response));
 }
-export const setMyStatus = (textStatus) => {
-    return (dispatch) => {
-        userAPI.setMeStatus(textStatus).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setProfileStatusAC(textStatus));
-            }
-        });
+export const setMyStatus = (textStatus) => async (dispatch) => {
+    let response = await userAPI.setMeStatus(textStatus);
+    if (response.data.resultCode === 0) {
+        dispatch(setProfileStatusAC(textStatus));
     }
 }
 
