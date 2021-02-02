@@ -92,11 +92,10 @@ export const setProfileInfo = (userid) => {
         });
     }
 }
-export const setProfileStatus = (userid) => {
-    return (dispatch) => {
-        userAPI.getUserStatus(userid).then(response => {
-            dispatch(setProfileStatusAC(response));
-        });
+export const setProfileStatus = (userid) => async (dispatch) =>{
+    let response = await userAPI.getUserStatus(userid);
+    if (response.data.resultCode === 0){
+        dispatch(setProfileStatusAC(response));
     }
 }
 export const setMyStatus = (textStatus) => {
