@@ -91,41 +91,29 @@ export const setUsersTotalCount = (totalCount) => {
     }
 }
 //Санки ===========================================================
-export const getUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
+export const getUsers = (currentPage, pageSize) => async (dispatch) => {
         dispatch(setIsFEtching(true));
-        userAPI.getFriends(currentPage, pageSize)
-            .then(response => {
+        let response = await userAPI.getFriends(currentPage, pageSize)
                 dispatch(setIsFEtching(false));
                 dispatch(setFriends(response.data.items));
                 dispatch(setUsersTotalCount(response.data.totalCount));
-            });
-    }
-}
 
-export const follow = (userid) => {
-    return (dispatch) => {
+}
+export const follow = (userid) => async (dispatch) => {
         dispatch(setFollowInProcess(true, userid));
-        userAPI.follow(userid)
-            .then(response => {
+        let response = await userAPI.follow(userid);
                 if (response.data.resultCode === 0) {
                     dispatch(followAC(userid));
                     dispatch(setFollowInProcess(false, userid));
                 }
-            });
-    }
 }
-export const unFollow = (userid) => {
-    return (dispatch) => {
+export const unFollow = (userid) => async (dispatch) => {
         dispatch(setFollowInProcess(true, userid));
-        userAPI.unfollow(userid)
-            .then(response => {
+        let response = await userAPI.unfollow(userid);
                 if (response.data.resultCode === 0) {
                     dispatch(unFollowAC(userid));
                     dispatch(setFollowInProcess(false, userid));
                 }
-            });
-    }
 }
 
 export default FriendReducer;

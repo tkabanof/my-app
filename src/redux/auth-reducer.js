@@ -28,28 +28,24 @@ export const setUserData = (userid, email, login, isAuth) => ({
     data: {userid, email, login, isAuth}
 })
 
-export const setUserInfo = () => (dispatch) => {
-    authAPI.authMe().then(response => {
+export const setUserInfo = () => async (dispatch) => {
+    let response = await authAPI.authMe();
         if (response.data.resultCode === 0) {
             let {id, login, email} = response.data.data;
             dispatch(setUserData(id, login, email, true));
         }
-    });
 }
-export const loginThunk = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(response => {
+export const loginThunk = (email, password, rememberMe) => async (dispatch) => {
+    let response = await authAPI.login(email, password, rememberMe);
         if (response.data.resultCode === 0) {
             dispatch(setUserInfo());
         }
-    })
 }
-export const logout = () => (dispatch) => {
-    authAPI.logOut().then(response => {
+export const logout = () => async (dispatch) => {
+    let response = await authAPI.logOut();
         if (response.data.resultCode === 0) {
             dispatch(setUserData(null, null, null, false));
             dispatch(setUserInfo());
         }
-    })
 }
-
 export default authReducer;
