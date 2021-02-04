@@ -20,8 +20,6 @@ let initialStore =
 
 const FriendReducer = (state = initialStore, action) => {
 
-    // console.log(state)
-    // console.log(action)
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -67,7 +65,7 @@ const FriendReducer = (state = initialStore, action) => {
             return {
                 ...state, followInProcess: action.isFEtching
                     ? [...state.followInProcess, action.userId]
-                    : state.followInProcess.filter(id => id != action.userId)
+                    : state.followInProcess.filter(id => id !== action.userId)
 
             }
         }
