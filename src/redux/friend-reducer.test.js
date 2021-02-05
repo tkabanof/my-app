@@ -1,9 +1,9 @@
-import FriendReducer, {followAC, unFollowAC} from "./friend-reducer";
+import FriendReducer, {followAC, setIsFEtching, unFollowAC} from "./friend-reducer";
 
 let testState =
     {
         items: [{id: 1, name: "Test", followed: false},
-                {id: 2, name: "Test2", followed: true}],
+            {id: 2, name: "Test2", followed: true}],
         pageSize: 20,
         totalUserCount: 10,
         currentPage: 1,
@@ -27,4 +27,9 @@ it('followAC', () => {
     let newState = FriendReducer(testState, action);
     // 3 expectation
     expect(newState.items[0].followed).toBe(true);
+});
+it('setIsFEtching', () => {
+    let action = setIsFEtching(true);
+    let newState = FriendReducer(testState, action);
+    expect(newState.isFEtching).toBe(true);
 });
