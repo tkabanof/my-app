@@ -27,7 +27,7 @@ const dialogsReducer = (state = initialStore, action) => {
             return state;
     }
 }
-export const addMessageActionCreator = (newMessageBody) => {
+export const addMessage = (newMessageBody) => {
     return {
         type: ADDMESSAGE, newMessageBody
     }
