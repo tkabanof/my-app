@@ -1,19 +1,26 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import FriendReducer from "./friend-reducer";
 import authReducer from "./auth-reducer";
-import thunkMiddleware from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
+import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
 
-let reducers = combineReducers({
-    profile: profileReducer,
-    dialogsState: dialogsReducer,
-    friends: FriendReducer,
-    auth: authReducer,
-    form: formReducer
+const middleware = getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+    thunk: true,
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const store = configureStore({
+    reducer: {
+        profile: profileReducer,
+        dialogsState: dialogsReducer,
+        friends: FriendReducer,
+        auth: authReducer,
+        form: formReducer
+    },
+    middleware,
+    devTools: process.env.NODE_ENV !== 'production',
+});
 
 export default store;
