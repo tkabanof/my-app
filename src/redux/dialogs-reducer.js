@@ -1,4 +1,6 @@
-const ADDMESSAGE = 'ADD-MESSAGE';
+import {createAction} from "@reduxjs/toolkit";
+
+export const addMessage = createAction('ADDMESSAGE');
 
 let initialStore = {
     dialogs: [
@@ -13,13 +15,17 @@ let initialStore = {
     ]
 }
 
+function getRandomInt(max, min) {
+    return Math.floor(Math.random() * Math.floor(max) + min);
+}
+
 const dialogsReducer = (state = initialStore, action) => {
 
     switch (action.type) {
-        case ADDMESSAGE: {
+        case addMessage.type: {
             return {
                 ...state,
-                messages: [...state.messages, {id: 999, message: action.newMessageBody}]
+                messages: [...state.messages, {id: getRandomInt(1000, 10), message: action.payload}]
             };
         }
 
@@ -27,11 +33,5 @@ const dialogsReducer = (state = initialStore, action) => {
             return state;
     }
 }
-export const addMessage = (newMessageBody) => {
-    return {
-        type: ADDMESSAGE, newMessageBody
-    }
-}
-
 
 export default dialogsReducer;
