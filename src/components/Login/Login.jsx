@@ -23,9 +23,9 @@ const renderField = ({
     </div>
 );
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field
                     name={"email"}
@@ -46,6 +46,7 @@ const LoginForm = (props) => {
             <div>
                 <Field component={"input"} type={"checkbox"} name={"rememberMe"}/>remeber me
             </div>
+            {error && <div>{error}</div>}
             <div>
                 <button>Login</button>
             </div>
