@@ -18,19 +18,82 @@ afterEach(() => {
 });
 
 describe("Status component", () => {
-    test("status from props should be in the state", () => {
+    test("example1", () => {
         let component;
         act(() => {
             component = create(<Status status="blblstatus"/>);
         });
         expect(component.toJSON()).toMatchSnapshot();
     });
+    test("status from props should be in the state", () => {
+        let component;
+        act(() => {
+            component = create(<Status status="blblstatus"/>);
+        });
+        const root = component.root;
+        const status = root.findByType(Status);
+        expect(status.props.status).toBe("blblstatus");
+    });
+    test("status should have a span", () => {
+        let component;
+        act(() => {
+            component = create(<Status status="blblstatus"/>);
+        });
+        const root = component.root;
+        const span = root.findByType("span");
+        expect(span).not.toBeNull();
+    });
+
+
+    test("status should have a span with correct status text", () => {
+        let component;
+        act(() => {
+            component = create(<Status status="blblstatus"/>);
+        });
+        const root = component.root;
+        const span = root.findByType("span");
+        expect(span.children[0]).toBe("blblstatus");
+    });
+    test("status should not have a input when started", () => {
+        let component;
+        act(() => {
+            component = create(<Status status="blblstatus"/>);
+        });
+        const root = component.root;
+        expect(() => {
+            const input = root.findByType("input");
+        }).toThrow();
+    });
+    test("input should be swithed to edit mode when duble click", () => {
+        let component;
+        act(() => {
+            component = create(<Status status={"blblstatus"} me={true}/>)
+        });
+        const root = component.root;
+        let span = root.findByType("span");
+
+        act(() => span.props.onDoubleClick());
+        let input;
+
+        try {
+            input = root.findByType("input");
+        } catch (e) {
+            input = {props: {value: "ERROR"}};
+        }
+        expect(input.props.value).toBe("blblstatus");
+    });
+    // test("callback should be callet at once", () => {
+    //     const mockCallBack = jest.fn();
+    //     let component;
+    //     act(() => {
+    //         component = create(<Status status={"blblstatus"} setMyStatus={mockCallBack}  me={true}/>)
+    //     });
+    //     const root = component.root;
+    //
+    //     act(() => root.update(<Status status={"blblstatus2"}/>));
+    //
+    //     expect(mockCallBack.mock.calls.length).toBe(1);
+    //
+    // });
+
 });
-
-
-/*
-  <Status status={props.profileStatus}
-              me={(props.me === p.userId)}
-              setMyStatus={props.setMyStatus}
-      />
-  */

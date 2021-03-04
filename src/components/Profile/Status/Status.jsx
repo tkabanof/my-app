@@ -34,7 +34,7 @@ const Status = (props) => {
             <div>
                 <span
                     onDoubleClick={activateEdit}
-                >{"Status " + textStatus}</span>
+                >{textStatus}</span>
             </div>
             }
             {editMode &&
