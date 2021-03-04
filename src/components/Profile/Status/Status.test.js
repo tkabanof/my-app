@@ -71,15 +71,9 @@ describe("Status component", () => {
         });
         const root = component.root;
         let span = root.findByType("span");
-
         act(() => span.props.onDoubleClick());
         let input;
-
-        try {
-            input = root.findByType("input");
-        } catch (e) {
-            input = {props: {value: "ERROR"}};
-        }
+        input = root.findByType("input");
         expect(input.props.value).toBe("blblstatus");
     });
 
