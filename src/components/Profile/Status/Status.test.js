@@ -82,18 +82,5 @@ describe("Status component", () => {
         }
         expect(input.props.value).toBe("blblstatus");
     });
-    // test("callback should be callet at once", () => {
-    //     const mockCallBack = jest.fn();
-    //     let component;
-    //     act(() => {
-    //         component = create(<Status status={"blblstatus"} setMyStatus={mockCallBack}  me={true}/>)
-    //     });
-    //     const root = component.root;
-    //
-    //     act(() => root.update(<Status status={"blblstatus2"}/>));
-    //
-    //     expect(mockCallBack.mock.calls.length).toBe(1);
-    //
-    // });
 
 });
