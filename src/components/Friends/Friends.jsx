@@ -17,10 +17,10 @@ let Friends = (props) => {
     />)
     return (
         <div>
-            <Paginator totalCount = {props.totalUserCount}
-                       pageSize = {props.pageSize}
-                       currentPage = {props.currentPage}
-                       onPageChanged = {props.onPageChanged}/>
+            <Paginator totalCount={props.totalUserCount}
+                       pageSize={props.pageSize}
+                       currentPage={props.currentPage}
+                       onPageChanged={props.onPageChanged}/>
             <div>
                 {friendItem}
             </div>
