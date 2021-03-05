@@ -1,16 +1,8 @@
 import Friend from "./FriendCard/Friend";
 import s from "./Friends.module.css"
+import Paginator from "../common/Paginator/Paginator";
 
 let Friends = (props) => {
-
-    let pageCount = Math.ceil(props.totalUserCount / props.pageSize);
-
-    let pages = [];
-
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-
-    }
 
     let friendItem = props.items.map(m => <Friend key={m.id}
                                                   userid={m.id}
@@ -25,14 +17,10 @@ let Friends = (props) => {
     />)
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p ? s.selectedPage : null}
-                                 onClick={(e) => {
-                                     props.onPageChanged(p)
-                                 }}>{p} </span>
-                })}
-            </div>
+            <Paginator totalCount = {props.totalUserCount}
+                       pageSize = {props.pageSize}
+                       currentPage = {props.currentPage}
+                       onPageChanged = {props.onPageChanged}/>
             <div>
                 {friendItem}
             </div>
