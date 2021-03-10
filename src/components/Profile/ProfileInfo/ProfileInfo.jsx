@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
             />
             <div className={s.profilePicture}>
                 <img
-                    src={p.photos.small === null ? user_photo : p.photos.small}/>
+                    src={p.photos.small || user_photo}/>
                 <div className={s.description}>
                     <p>{p.aboutMe}</p>
                     <a href={p.contacts.facebook}>{p.contacts.facebook}</a>
