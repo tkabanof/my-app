@@ -1,4 +1,5 @@
 import {userAPI} from "../api/api";
+import {createAction} from "@reduxjs/toolkit";
 
 const ADDPOST = 'ADD-POST';
 const DELETEPOST = 'DELETE_POST';
@@ -6,6 +7,7 @@ const SET_POSTS = 'SET_POSTS'
 const SET_PROFILE_INFO = 'SET_PROFILE_INFO'
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
+export const updatePhoto = createAction('UPDATEAVATAR');
 
 let initialState = {
     postsItems: [
@@ -42,6 +44,18 @@ let initialState = {
 export const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case updatePhoto.type: {
+            let photos = {
+                small: "asgfsd",
+                large: "fasfaf"
+            }
+            debugger;
+            return {
+                ...state,
+                profileInfodata: [...state.profileInfodata, photos],
+            }
+        }
+
         case ADDPOST: {
             let newPost = {
                 id: 999,
@@ -97,6 +111,12 @@ export const setMyStatus = (textStatus) => async (dispatch) => {
     let response = await userAPI.setMeStatus(textStatus);
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatusAC(textStatus));
+    }
+}
+export const updateAvatar = (file) => async (dispatch) => {
+    let response = await userAPI.setMyAvatar(file);
+    if (response.data.resultCode === 0) {
+        dispatch(updatePhoto(response.data.data));
     }
 }
 

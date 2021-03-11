@@ -1,7 +1,14 @@
 import {Component} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {addPost, setMyStatus, setPosts, setProfileInfo, setProfileStatus} from "../../redux/profile-reducer";
+import {
+    addPost,
+    setMyStatus,
+    setPosts,
+    setProfileInfo,
+    setProfileStatus,
+    updateAvatar
+} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -17,6 +24,12 @@ class ProfileComponent extends Component {
         this.props.setProfileInfo(userId);
         this.props.setProfileStatus(userId);
     }
+    componentDidUpdate(prevProps) {
+        // Популярный пример (не забудьте сравнить пропсы):
+        if (this.props.profileInfodata !== prevProps.profileInfodata) {
+            this.fetchData(this.props.userID);
+        }
+    }
 
     render() {
         return <div>
@@ -31,6 +44,7 @@ class ProfileComponent extends Component {
                 profileStatus={this.props.profileStatus}
                 setMyStatus={this.props.setMyStatus}
                 me={this.props.loginid}
+                updateAvatar = {this.props.updateAvatar}
             />
         </div>
     };
@@ -47,7 +61,7 @@ let mapStateToProps = (state) => {
 }
 
 const ProfileContainer = compose(connect(mapStateToProps, {
-        addPost, setPosts, setProfileInfo, setProfileStatus, setMyStatus,
+        addPost, setPosts, setProfileInfo, setProfileStatus, setMyStatus, updateAvatar,
     }), withRouter,
     withAuthRedirect)
 (ProfileComponent)

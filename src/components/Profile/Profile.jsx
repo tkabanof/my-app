@@ -9,6 +9,7 @@ const Profile = (props) => {
                 profileStatus={props.profileStatus}
                 me={props.me}
                 setMyStatus={props.setMyStatus}
+                updateAvatar={props.updateAvatar}
             />
             <Posts
                 postsItems={props.postsItems}

@@ -26,6 +26,15 @@ export const userAPI = {
     },
     setMeStatus(statusText) {
         return instanceAPI.put(`profile/status`, {status: statusText})
+    },
+    setMyAvatar(photo) {
+        let formData = new FormData();
+        formData.append("image", photo)
+        return instanceAPI.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }
 export const authAPI = {
