@@ -24,10 +24,14 @@ class ProfileComponent extends Component {
         this.props.setProfileInfo(userId);
         this.props.setProfileStatus(userId);
     }
+
     componentDidUpdate(prevProps) {
         // Популярный пример (не забудьте сравнить пропсы):
-        if (this.props.profileInfodata !== prevProps.profileInfodata) {
+        if (this.props.profileInfodata.photos.small !== prevProps.profileInfodata.photos.small) {
             //this.fetchData(this.props.userID);
+            console.log("profile did update");
+            let userId = this.props.match.params.userId;
+            this.props.setProfileInfo(userId);
         }
     }
 
@@ -44,7 +48,7 @@ class ProfileComponent extends Component {
                 profileStatus={this.props.profileStatus}
                 setMyStatus={this.props.setMyStatus}
                 me={this.props.loginid}
-                updateAvatar = {this.props.updateAvatar}
+                updateAvatar={this.props.updateAvatar}
             />
         </div>
     };
