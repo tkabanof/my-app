@@ -27,7 +27,7 @@ class ProfileComponent extends Component {
     componentDidUpdate(prevProps) {
         // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.profileInfodata !== prevProps.profileInfodata) {
-            this.fetchData(this.props.userID);
+            //this.fetchData(this.props.userID);
         }
     }
 

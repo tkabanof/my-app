@@ -46,13 +46,12 @@ export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case updatePhoto.type: {
             let photos = {
-                small: "asgfsd",
-                large: "fasfaf"
+                photos: {...action.payload.photos}
+
             }
-            debugger;
             return {
                 ...state,
-                profileInfodata: [...state.profileInfodata, photos],
+                profileInfodata: {...state.profileInfodata, photos},
             }
         }
 
