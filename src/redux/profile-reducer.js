@@ -117,8 +117,13 @@ export const updateAvatar = (file) => async (dispatch) => {
     }
 }
 export const updateMyInfo = (myInfo) => async (dispatch, getState) => {
+
     let userid = getState().auth.userid;
-    let response = await userAPI.setMyInfo(myInfo);
+    let req = {
+        ...myInfo, userId: userid
+    }
+    debugger
+    let response = await userAPI.setMyInfo(req);
 
     if (response.data.resultCode === 0) {
         dispatch(setIsFEtching(true));

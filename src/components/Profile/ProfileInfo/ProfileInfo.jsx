@@ -2,6 +2,9 @@ import s from "./ProfileInfo.module.css"
 import user_photo from "../../../assets/images/userpic.png";
 import Status from "../Status/Status";
 import MyInfo from "./MyInfo";
+import MyInfoForm from "./MyInfoForm";
+import {useState} from "react";
+import {FormControlLabel, Switch} from "@material-ui/core";
 
 const ProfileInfo = (props) => {
     let p = props.profileInfodata;
@@ -12,6 +15,8 @@ const ProfileInfo = (props) => {
             props.updateAvatar(e.target.files[0])
         }
     }
+
+    let [editMode, setEditMode] = useState(false);
 
     return (
         <div>
@@ -28,7 +33,23 @@ const ProfileInfo = (props) => {
                        onChange={avatarSelected}/>}
             </div>
 
+            <div>
+                {props.me &&
+                <FormControlLabel
+                    control={<Switch size="small" checked={editMode} onChange={() => {
+                        setEditMode(!editMode)
+                    }}/>}
+                    label="Режим редактирования"
+                />}
+            </div>
+
+            {!editMode &&
             <MyInfo p={p} me={isMe}/>
+            }
+
+            {editMode &&
+            <MyInfoForm updateMyInfo={props.updateMyInfo}/>
+            }
 
         </div>
     )

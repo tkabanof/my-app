@@ -22,6 +22,14 @@ export const aol = value =>
     value && /.+@aol\.com/.test(value)
         ? 'Really? You still use AOL for your email?'
         : undefined
+export const fb = value =>
+    value && /.+facebook\.com/.test(value)
+        ? 'Не похоже на профиль фейсбук'
+        : undefined
+export const vk = value =>
+    value && /.+vk\.com/.test(value)
+        ? 'Не похоже на профиль vk'
+        : undefined
 export const alphaNumeric = value =>
     value && /[^a-zA-Z0-9 ]/i.test(value)
         ? 'Only alphanumeric characters'
