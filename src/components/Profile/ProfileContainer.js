@@ -7,7 +7,7 @@ import {
     setPosts,
     setProfileInfo,
     setProfileStatus,
-    updateAvatar
+    updateAvatar, updateMyInfo
 } from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
@@ -28,8 +28,6 @@ class ProfileComponent extends Component {
     componentDidUpdate(prevProps) {
         // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.profileInfodata.photos.small !== prevProps.profileInfodata.photos.small) {
-            //this.fetchData(this.props.userID);
-            console.log("profile did update");
             let userId = this.props.match.params.userId;
             this.props.setProfileInfo(userId);
         }
@@ -49,6 +47,7 @@ class ProfileComponent extends Component {
                 setMyStatus={this.props.setMyStatus}
                 me={this.props.loginid}
                 updateAvatar={this.props.updateAvatar}
+                updateMyInfo={this.props.updateMyInfo}
             />
         </div>
     };
@@ -65,7 +64,7 @@ let mapStateToProps = (state) => {
 }
 
 const ProfileContainer = compose(connect(mapStateToProps, {
-        addPost, setPosts, setProfileInfo, setProfileStatus, setMyStatus, updateAvatar,
+        addPost, setPosts, setProfileInfo, setProfileStatus, setMyStatus, updateAvatar, updateMyInfo,
     }), withRouter,
     withAuthRedirect)
 (ProfileComponent)

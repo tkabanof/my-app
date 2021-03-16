@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA'
 
 let initialStore = {
-    userid: 2,
+    userid: null,
     email: null,
     login: null,
     isFetching: null,

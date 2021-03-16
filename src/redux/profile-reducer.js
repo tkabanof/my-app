@@ -9,6 +9,7 @@ const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
 export const updatePhoto = createAction('UPDATEAVATAR');
 
+
 let initialState = {
     postsItems: [
         {id: 1, message: 'Lorem ipsum dolor sit amet', likes: 15},
@@ -47,14 +48,12 @@ export const profileReducer = (state = initialState, action) => {
         case updatePhoto.type: {
             let photos = {
                 photos: {...action.payload.photos}
-
             }
             return {
                 ...state,
                 profileInfodata: {...state.profileInfodata, photos},
             }
         }
-
         case ADDPOST: {
             let newPost = {
                 id: 999,
@@ -100,7 +99,6 @@ export const setProfileInfo = (userid) => async (dispatch) => {
     dispatch(setIsFEtching(true));
     let response = await userAPI.getUserProfileData(userid);
     dispatch(setProfileInfoAC(response));
-
 }
 export const setProfileStatus = (userid) => async (dispatch) => {
     let response = await userAPI.getUserStatus(userid);
@@ -116,6 +114,16 @@ export const updateAvatar = (file) => async (dispatch) => {
     let response = await userAPI.setMyAvatar(file);
     if (response.data.resultCode === 0) {
         dispatch(updatePhoto(response.data.data));
+    }
+}
+export const updateMyInfo = (myInfo) => async (dispatch, getState) => {
+    let userid = getState().auth.userid;
+    let response = await userAPI.setMyInfo(myInfo);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setIsFEtching(true));
+        let response = await userAPI.getUserProfileData(userid);
+        dispatch(setProfileInfoAC(response));
     }
 }
 

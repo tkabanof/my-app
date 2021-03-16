@@ -27,6 +27,9 @@ export const userAPI = {
     setMeStatus(statusText) {
         return instanceAPI.put(`profile/status`, {status: statusText})
     },
+    setMyInfo(myInfo) {
+        return instanceAPI.put(`profile`, myInfo)
+    },
     setMyAvatar(photo) {
         let formData = new FormData();
         formData.append("image", photo)
