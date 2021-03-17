@@ -122,7 +122,8 @@ export const updateMyInfo = (myInfo) => async (dispatch, getState) => {
     let req = {
         ...myInfo, userId: userid
     }
-    debugger
+
+    console.log(req)
     let response = await userAPI.setMyInfo(req);
 
     if (response.data.resultCode === 0) {
