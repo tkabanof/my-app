@@ -4,4 +4,8 @@
 }
 .description{
     padding: 10px;
+    display: inline;
+}
+.social {
+    display: flex;
 }

@@ -50,7 +50,6 @@ const ProfileInfo = (props) => {
             {editMode &&
             <MyInfoForm updateMyInfo={props.updateMyInfo}/>
             }
-
         </div>
     )
 }
