@@ -1,4 +1,5 @@
 import {userAPI} from "../api/api";
+import {userItem} from "../types/mainTypes";
 
 const FOLLOW = 'FOLLOWACTION'
 const UNFOLLOW = 'UNFOLLOW ACTION'
@@ -10,7 +11,7 @@ const FOLLOW_IN_PROCESS = 'FOLLOW_IN_PROCESS'
 
 let initialStore =
     {
-        items: [],
+        items: [] as Array<userItem>,
         pageSize: 20,
         totalUserCount: 10,
         currentPage: 1,
@@ -18,7 +19,7 @@ let initialStore =
         followInProcess: []
     }
 
-const FriendReducer = (state = initialStore, action) => {
+const FriendReducer = (state = initialStore, action: any) => {
 
     switch (action.type) {
         case FOLLOW: {
@@ -66,30 +67,28 @@ const FriendReducer = (state = initialStore, action) => {
                 ...state, followInProcess: action.isFEtching
                     ? [...state.followInProcess, action.userId]
                     : state.followInProcess.filter(id => id !== action.userId)
-
             }
         }
-
         default: {
             return state;
         }
     }
 }
 //Экшены ==========================================================
-export const followAC = (id) => ({type: FOLLOW, id})
-export const unFollowAC = (id) => ({type: UNFOLLOW, id})
-export const setFriends = (items) => ({type: SET_FRIENDS, items})
-export const setCurrentPage = (currentPageNum) => ({type: SET_CURRENT_PAGE, currentPageNum})
-export const setIsFEtching = (isFEtching) => ({type: SET_IS_FETCHING, isFEtching})
-export const setFollowInProcess = (isFEtching, userId) => ({type: FOLLOW_IN_PROCESS, isFEtching, userId})
-export const setUsersTotalCount = (totalCount) => {
+export const followAC = (id: number) => ({type: FOLLOW, id})
+export const unFollowAC = (id: number) => ({type: UNFOLLOW, id})
+export const setFriends = (items: userItem) => ({type: SET_FRIENDS, items})
+export const setCurrentPage = (currentPageNum: number) => ({type: SET_CURRENT_PAGE, currentPageNum})
+export const setIsFEtching = (isFEtching: boolean) => ({type: SET_IS_FETCHING, isFEtching})
+export const setFollowInProcess = (isFEtching: boolean, userId: number) => ({type: FOLLOW_IN_PROCESS, isFEtching, userId})
+export const setUsersTotalCount = (totalCount: number) => {
     return {
         type: SET_TOTAL_COUNT,
-        totalUserCount: totalCount
+        totalUserCount: totalCount as number
     }
 }
 //Санки ===========================================================
-export const getUsers = (currentPage, pageSize) => async (dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: any) => {
         dispatch(setIsFEtching(true));
         let response = await userAPI.getFriends(currentPage, pageSize)
                 dispatch(setIsFEtching(false));
@@ -97,7 +96,7 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) => {
                 dispatch(setUsersTotalCount(response.data.totalCount));
 
 }
-export const follow = (userid) => async (dispatch) => {
+export const follow = (userid: number) => async (dispatch: any) => {
         dispatch(setFollowInProcess(true, userid));
         let response = await userAPI.follow(userid);
                 if (response.data.resultCode === 0) {
@@ -105,7 +104,7 @@ export const follow = (userid) => async (dispatch) => {
                     dispatch(setFollowInProcess(false, userid));
                 }
 }
-export const unFollow = (userid) => async (dispatch) => {
+export const unFollow = (userid: number) => async (dispatch: any) => {
         dispatch(setFollowInProcess(true, userid));
         let response = await userAPI.unfollow(userid);
                 if (response.data.resultCode === 0) {

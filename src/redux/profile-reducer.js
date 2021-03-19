@@ -9,7 +9,6 @@ const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
 export const updatePhoto = createAction('UPDATEAVATAR');
 
-
 let initialState = {
     postsItems: [
         {id: 1, message: 'Lorem ipsum dolor sit amet', likes: 15},
