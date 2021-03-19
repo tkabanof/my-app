@@ -1,24 +1,11 @@
 import {authAPI} from "../api/api";
 import {createAction} from "@reduxjs/toolkit";
+import {initialStoreType, userLoginData} from "../types/mainTypes";
 
 // const SET_USER_DATA = 'SET_USER_DATA'
 export const setUserData = createAction<userLoginData>('SET_USER_DATA');
 
 
-export type initialStoreType = {
-    userid: number | null,
-    email: string | null,
-    login: string | null,
-    isFetching: boolean,
-    isAuth: boolean
-}
-export type userLoginData = {
-    userid: number | null,
-    email: string | null,
-    login: string | null,
-    isAuth: boolean
-
-}
 
 let initialStore: initialStoreType = {
     userid: null,
