@@ -27,19 +27,45 @@ export type messageStore = {
     messages: Array<messageType>
 
 }
-export type photos = {
+export type photosType = {
     small: string
     large: string
 }
-export type userItem = {
+export type userItemType = {
     id: number
     name: string
     status: string
-    photos: photos
+    photos: photosType
     followed: boolean
 }
-export type usersResponse = {
-    items: userItem
+export type usersResponseType = {
+    items: userItemType
     totalCount: number
     error: string
+}
+
+export type postsItemType = {
+    id: number
+    message: string
+    likes: number
+}
+export type contactsType = {
+    facebook: string | null
+    website: string | null
+    vk: string | null
+    twitter: string | null
+    instagram: string | null
+    youtube: string | null
+    github: string | null
+    mainLink: string | null
+}
+
+export type profileInfodataType = {
+    userId: number
+    lookingForAJobDescription: string
+    aboutMe: string
+    lookingForAJob: boolean
+    fullName: string
+    contacts: contactsType
+    photos: photosType
 }

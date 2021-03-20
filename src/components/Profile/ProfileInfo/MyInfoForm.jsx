@@ -1,4 +1,5 @@
 import {Form, Field} from 'react-final-form'
+import {required} from "../../../utils/validators";
 
 const MyInfoForm = (props) => {
 
@@ -122,7 +123,9 @@ const MyInfoForm = (props) => {
 
                     <div>
                         <label>Описание предпочитаемой работы</label>
-                        <Field name="lookingForAJobDescription" component="textarea" placeholder="Notes"/>
+                        <Field name="lookingForAJobDescription"
+                               validate={required}
+                               component="textarea" placeholder="Notes"/>
                     </div>
                     <div className="buttons">
                         <button type="submit" disabled={submitting || pristine}>

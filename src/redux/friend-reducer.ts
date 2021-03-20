@@ -1,5 +1,5 @@
 import {userAPI} from "../api/api";
-import {userItem} from "../types/mainTypes";
+import {userItemType} from "../types/mainTypes";
 
 const FOLLOW = 'FOLLOWACTION'
 const UNFOLLOW = 'UNFOLLOW ACTION'
@@ -11,7 +11,7 @@ const FOLLOW_IN_PROCESS = 'FOLLOW_IN_PROCESS'
 
 let initialStore =
     {
-        items: [] as Array<userItem>,
+        items: [] as Array<userItemType>,
         pageSize: 20,
         totalUserCount: 10,
         currentPage: 1,
@@ -77,7 +77,7 @@ const FriendReducer = (state = initialStore, action: any) => {
 //Экшены ==========================================================
 export const followAC = (id: number) => ({type: FOLLOW, id})
 export const unFollowAC = (id: number) => ({type: UNFOLLOW, id})
-export const setFriends = (items: userItem) => ({type: SET_FRIENDS, items})
+export const setFriends = (items: userItemType) => ({type: SET_FRIENDS, items})
 export const setCurrentPage = (currentPageNum: number) => ({type: SET_CURRENT_PAGE, currentPageNum})
 export const setIsFEtching = (isFEtching: boolean) => ({type: SET_IS_FETCHING, isFEtching})
 export const setFollowInProcess = (isFEtching: boolean, userId: number) => ({type: FOLLOW_IN_PROCESS, isFEtching, userId})
