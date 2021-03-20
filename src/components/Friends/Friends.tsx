@@ -1,9 +1,23 @@
 import s from "./Friends.module.css"
 import Paginator from "../common/Paginator/Paginator";
 import User from "./FriendCard/User";
+import {userItemType} from "../../types/mainTypes";
+import {FC} from "react";
 
 
-let Friends = (props) => {
+type Props = {
+    items: Array<userItemType>
+    onPageChanged: (value: number) => void
+    followInProcess: Array<number>
+    totalUserCount: number
+    setFollowInProcess: () => void
+    follow: ()=> void
+    unFollow: ()=> void
+
+
+}
+
+let Friends: FC<Props> = (props) => {
 
     let friendItem = props.items.map(m => <User key={m.id}
                                                 userid={m.id}
