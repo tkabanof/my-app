@@ -1,7 +1,7 @@
 import s from "./Paginator.module.css"
 import Pagination from '@material-ui/lab/Pagination';
 import {makeStyles} from '@material-ui/core/styles';
-import {useState} from "react";
+import {FC, useState} from "react";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,11 +11,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Paginator = (props) => {
+type Props = {
+    totalCount: number
+    onPageChanged: (value: number) => void
+
+}
+
+const Paginator: FC<Props> = (props) => {
 
     const classes = useStyles();
     const [page, setPage] = useState(1);
-    const handleChange = (event, value) => {
+    const handleChange = (event: any, value: number) => {
         setPage(value);
         props.onPageChanged(value);
     };

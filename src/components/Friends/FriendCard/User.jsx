@@ -2,7 +2,7 @@ import s from './Friend.module.css'
 import user_photo from "../../../assets/images/userpic.png"
 import {NavLink} from "react-router-dom";
 
-const Friend = (props) => {
+const User = (props) => {
 
     return (
 
@@ -37,4 +37,4 @@ const Friend = (props) => {
     )
 }
 
-export default Friend;
+export default User;
