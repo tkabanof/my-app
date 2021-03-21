@@ -16,10 +16,11 @@ let initialStore =
         totalUserCount: 10,
         currentPage: 1,
         isFEtching: false,
-        followInProcess: []
+        followInProcess: [] as Array<number>
     }
+type initialStoreType = typeof initialStore
 
-const FriendReducer = (state = initialStore, action: any) => {
+const FriendReducer = (state = initialStore, action: any): initialStoreType => {
 
     switch (action.type) {
         case FOLLOW: {
@@ -80,7 +81,11 @@ export const unFollowAC = (id: number) => ({type: UNFOLLOW, id})
 export const setFriends = (items: userItemType) => ({type: SET_FRIENDS, items})
 export const setCurrentPage = (currentPageNum: number) => ({type: SET_CURRENT_PAGE, currentPageNum})
 export const setIsFEtching = (isFEtching: boolean) => ({type: SET_IS_FETCHING, isFEtching})
-export const setFollowInProcess = (isFEtching: boolean, userId: number) => ({type: FOLLOW_IN_PROCESS, isFEtching, userId})
+export const setFollowInProcess = (isFEtching: boolean, userId: number) => ({
+    type: FOLLOW_IN_PROCESS,
+    isFEtching,
+    userId
+})
 export const setUsersTotalCount = (totalCount: number) => {
     return {
         type: SET_TOTAL_COUNT,
@@ -89,28 +94,28 @@ export const setUsersTotalCount = (totalCount: number) => {
 }
 //Санки ===========================================================
 export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: any) => {
-        dispatch(setIsFEtching(true));
-        let response = await userAPI.getFriends(currentPage, pageSize)
-                dispatch(setIsFEtching(false));
-                dispatch(setFriends(response.data.items));
-                dispatch(setUsersTotalCount(response.data.totalCount));
+    dispatch(setIsFEtching(true));
+    let response = await userAPI.getFriends(currentPage, pageSize)
+    dispatch(setIsFEtching(false));
+    dispatch(setFriends(response.data.items));
+    dispatch(setUsersTotalCount(response.data.totalCount));
 
 }
 export const follow = (userid: number) => async (dispatch: any) => {
-        dispatch(setFollowInProcess(true, userid));
-        let response = await userAPI.follow(userid);
-                if (response.data.resultCode === 0) {
-                    dispatch(followAC(userid));
-                    dispatch(setFollowInProcess(false, userid));
-                }
+    dispatch(setFollowInProcess(true, userid));
+    let response = await userAPI.follow(userid);
+    if (response.data.resultCode === 0) {
+        dispatch(followAC(userid));
+        dispatch(setFollowInProcess(false, userid));
+    }
 }
 export const unFollow = (userid: number) => async (dispatch: any) => {
-        dispatch(setFollowInProcess(true, userid));
-        let response = await userAPI.unfollow(userid);
-                if (response.data.resultCode === 0) {
-                    dispatch(unFollowAC(userid));
-                    dispatch(setFollowInProcess(false, userid));
-                }
+    dispatch(setFollowInProcess(true, userid));
+    let response = await userAPI.unfollow(userid);
+    if (response.data.resultCode === 0) {
+        dispatch(unFollowAC(userid));
+        dispatch(setFollowInProcess(false, userid));
+    }
 }
 
 export default FriendReducer;

@@ -1,7 +1,26 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import Posts from "./Posts/Posts";
+import {FC} from "react";
+import {postsItemType, profileInfodataType} from "../../types/mainTypes";
 
-const Profile = (props) => {
+
+type PropType = {
+    profileInfodata: profileInfodataType
+    profileStatus: string
+    me: number
+    setMyStatus: () => void
+    updateAvatar: () => void
+    updateMyInfo: () => void
+
+    postsItems: Array<postsItemType>
+    // newPostText: string
+    postsIsFEtching: boolean
+    addPost: () => void
+    // updateNewPost: () => void
+    setPosts: () => void
+    // setProfileInfo: () => void
+}
+const Profile: FC<PropType> = (props) => {
     return (
         <div>
             <ProfileInfo
@@ -14,12 +33,12 @@ const Profile = (props) => {
             />
             <Posts
                 postsItems={props.postsItems}
-                newPostText={props.newPostText}
+                // newPostText={props.newPostText}
                 postsIsFEtching={props.postsIsFEtching}
                 addPost={props.addPost}
-                updateNewPost={props.updateNewPost}
+                // updateNewPost={props.updateNewPost}
                 setPosts={props.setPosts}
-                setProfileInfo={props.setProfileInfo}
+                // setProfileInfo={props.setProfileInfo}
             />
         </div>
     )

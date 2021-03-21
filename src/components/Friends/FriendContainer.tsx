@@ -1,7 +1,5 @@
 import {connect} from "react-redux";
-import { Component } from "react";
 import Friends from "./Friends";
-import Preloader from "../common/Preloader/Preloader";
 import {
     follow, getUsers,
     setCurrentPage, setFollowInProcess,
@@ -9,37 +7,55 @@ import {
 } from "../../redux/friend-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {Component} from "react";
+import Preloader from "../common/Preloader/Preloader";
+import {userItemType} from "../../types/mainTypes";
+import {RootState} from "../../redux/redux-store";
 
-class FriendsComponent extends Component {
+type PropsType = {
+    currentPage: number
+    pageSize: number
+    isFEtching: boolean
+    totalUserCount: number
+    followInProcess: Array<number>
+    items: Array<userItemType>
+    setCurrentPage: (pageNum: number) => void
+    getUsers: (pageNum: number, pageSize: number) => void
+    setFollowInProcess: () => void
+    follow: ()=> void
+    unFollow: ()=> void
+
+}
+
+class FriendsComponent extends Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
-    onPageChanged = (pageNum) => {
+    onPageChanged = (pageNum: number) => {
         this.props.setCurrentPage(pageNum);
         this.props.getUsers(pageNum, this.props.pageSize);
     }
 
     render() {
         return <>
-            <div>
-                {this.props.isFEtching ? <Preloader/> : null}</div>
+                {this.props.isFEtching ? <Preloader/> : null}
             <Friends
                 totalUserCount={this.props.totalUserCount}
-                pageSize={this.props.pageSize}
+                //pageSize={this.props.pageSize}
                 items={this.props.items}
-                currentPage={this.props.currentPage}
+                //currentPage={this.props.currentPage}
                 follow={this.props.follow}
                 unFollow={this.props.unFollow}
                 onPageChanged={this.onPageChanged}
                 followInProcess={this.props.followInProcess}
             />
         </>
-    };
+    }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState) => {
     return {
         items: state.friends.items,
         pageSize: state.friends.pageSize,

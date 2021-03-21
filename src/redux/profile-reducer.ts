@@ -10,7 +10,15 @@ const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS'
 const SET_IS_FETCHING = 'SET_IS_FETCHING'
 export const updatePhoto = createAction<photosType>('UPDATEAVATAR');
 
-let initialState = {
+type initialStateType = {
+    postsItems: Array<postsItemType>
+    postsIsFEtching: boolean
+    profileStatus: string | null
+    profileInfodata: profileInfodataType
+    profileInfoIsFEtching: boolean
+}
+
+let initialState: initialStateType = {
     postsItems: [
         {id: 1, message: 'Lorem ipsum dolor sit amet', likes: 15},
         {id: 2, message: 'But I must explain to you how all this mistaken idea', likes: 45},
@@ -42,13 +50,11 @@ let initialState = {
     profileInfoIsFEtching: false as boolean
 }
 
-export const profileReducer = (state = initialState, action: any) => {
+export const profileReducer = (state = initialState, action: any): initialStateType => {
 
     switch (action.type) {
         case updatePhoto.type: {
-            let photos = {
-                photos: {...action.payload.photos}
-            }
+            let photos: photosType = {...action.payload}
             return {
                 ...state,
                 profileInfodata: {...state.profileInfodata, photos},
@@ -80,9 +86,9 @@ export const profileReducer = (state = initialState, action: any) => {
         case SET_PROFILE_STATUS: {
             return {...state, profileStatus: action.response.data}
         }
-        case SET_POSTS : {
-            return {}
-        }
+        // case SET_POSTS : {
+        //     return {}
+        // }
         default:
             return state;
     }

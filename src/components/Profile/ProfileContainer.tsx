@@ -13,8 +13,31 @@ import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {RootState} from "../../redux/redux-store";
+import {postsItemType, profileInfodataType} from "../../types/mainTypes";
 
-class ProfileComponent extends Component {
+
+type PropsType = {
+    profileInfodata: profileInfodataType
+    isFEtching: boolean
+    postsIsFEtching: boolean
+    match: any //match????   wtf?
+    profileStatus: string
+    loginid: number
+    postsItems: Array<postsItemType>
+    setProfileInfo: (userId: number) => void
+    setProfileStatus: (userId: number) => void
+    addPost: () => void
+    setPosts: () => void
+    updateAvatar: () => void
+    setMyStatus: () => void
+    updateMyInfo: () => void
+
+
+
+
+}
+class ProfileComponent extends Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
@@ -25,7 +48,7 @@ class ProfileComponent extends Component {
         this.props.setProfileStatus(userId);
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps: PropsType) {
         // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.profileInfodata.photos.small !== prevProps.profileInfodata.photos.small) {
             let userId = this.props.match.params.userId;
@@ -53,7 +76,7 @@ class ProfileComponent extends Component {
     };
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState) => {
     return {
         postsItems: state.profile.postsItems,
         postsIsFEtching: state.profile.postsIsFEtching,

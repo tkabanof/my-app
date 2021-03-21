@@ -10,7 +10,7 @@ type Props = {
     onPageChanged: (value: number) => void
     followInProcess: Array<number>
     totalUserCount: number
-    setFollowInProcess: () => void
+    //setFollowInProcess: () => void
     follow: ()=> void
     unFollow: ()=> void
 
@@ -28,7 +28,7 @@ let Friends: FC<Props> = (props) => {
                                                 follow={props.follow}
                                                 unFollow={props.unFollow}
                                                 followInProcess={props.followInProcess}
-                                                setFollowInProcess={props.setFollowInProcess}
+                                                //setFollowInProcess={props.setFollowInProcess}
     />)
     return (
         <div>
