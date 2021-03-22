@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import {StrictMode} from 'react';
 import * as serviceWorker from './serviceWorker';
 import {store} from './redux/redux-store'
 import ReactDOM from 'react-dom';

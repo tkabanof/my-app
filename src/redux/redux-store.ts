@@ -17,7 +17,6 @@ export const store = configureStore({
         profile: profileReducer,
         dialogsState: dialogsReducer,
         friends: FriendReducer,
-        // auth: authReducer,
         auth: authReducer,
         form: formReducer
     },
@@ -26,9 +25,7 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>
-export type AppThunk<ReturnType = void> = ThunkAction<
-    ReturnType,
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
     RootState,
     unknown,
-    Action<string>
-    >;
+    Action<string>>;

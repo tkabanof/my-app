@@ -14,9 +14,9 @@ const Header = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(setUserInfoN())
-    },[userid, login, isAuth])
+    }, [userid, login, isAuth])
 
     return (
         <header className={s.header}>

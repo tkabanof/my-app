@@ -34,9 +34,8 @@ type PropsType = {
     updateMyInfo: () => void
 
 
-
-
 }
+
 class ProfileComponent extends Component<PropsType> {
 
     componentDidMount() {
