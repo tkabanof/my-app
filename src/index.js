@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import * as serviceWorker from './serviceWorker';
-import store from './redux/redux-store'
+import {store} from './redux/redux-store'
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';

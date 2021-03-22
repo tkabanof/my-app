@@ -1,9 +1,10 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import FriendReducer from "./friend-reducer";
-import authReducer from "./auth-reducer";
 import {reducer as formReducer} from 'redux-form'
-import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import {Action, configureStore, getDefaultMiddleware, ThunkAction} from "@reduxjs/toolkit";
+import authReducer from "./authSlice";
+
 
 const middleware = getDefaultMiddleware({
     immutableCheck: false,
@@ -11,11 +12,12 @@ const middleware = getDefaultMiddleware({
     thunk: true,
 });
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         profile: profileReducer,
         dialogsState: dialogsReducer,
         friends: FriendReducer,
+        // auth: authReducer,
         auth: authReducer,
         form: formReducer
     },
@@ -24,5 +26,9 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>
-
-export default store;
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+    >;

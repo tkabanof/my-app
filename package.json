@@ -52,6 +52,7 @@
   "devDependencies": {
     "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.12",
+    "@types/react-router-dom": "^5.1.7",
     "@types/redux-form": "^8.3.1",
     "@typescript-eslint/parser": "^4.18.0",
     "react-test-renderer": "^17.0.1",

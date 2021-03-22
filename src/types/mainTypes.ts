@@ -5,12 +5,16 @@ export type initialStoreType = {
     isFetching: boolean,
     isAuth: boolean
 }
+export type loginFormData = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
 export type userLoginData = {
     userid: number | null,
     email: string | null,
     login: string | null,
     isAuth: boolean
-
 }
 export type messageType = {
     message: string
