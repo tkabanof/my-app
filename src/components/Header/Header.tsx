@@ -5,7 +5,6 @@ import {logOut, selectAuthLogin, selectAuthUserId, selectIsAuth, setUserInfoN} f
 import {useEffect} from "react";
 import logo from './../../logo.svg';
 
-
 const Header = () => {
 
     const userid = useSelector(selectAuthUserId);
@@ -25,7 +24,11 @@ const Header = () => {
             <div className={s.loginBlock}>
                 {isAuth ?
                     <div>{login}
-                        <button onClick={dispatch(logOut)}>LogOut</button>
+                        <button onClick={() => {
+                            dispatch(logOut())
+                        }
+                        }>LogOut
+                        </button>
                     </div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
