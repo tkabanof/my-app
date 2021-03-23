@@ -1,9 +1,9 @@
 import {Field, reduxForm} from "redux-form";
 import {email, maxLength15, minLength2, required} from "../../utils/validators";
 import s from "./Login.module.css"
-import {connect} from "react-redux";
-import {loginThunk} from "../../redux/auth-reducer";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router";
+import {login, selectIsAuth} from "../../redux/authSlice";
 
 const renderField = ({
                          input,
@@ -58,13 +58,17 @@ const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
 
-const Login = (props) => {
+const Login = () => {
+
+    const dispatch = useDispatch();
+    const isAuth = useSelector(selectIsAuth);
+
 
     const onSubmit = (formData) => {
-        props.loginThunk(formData.email, formData.password, formData.rememberMe)
+        dispatch(login(formData.email, formData.password, formData.rememberMe));
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
     return <div>
@@ -73,8 +77,5 @@ const Login = (props) => {
     </div>
 };
 
-const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
-});
 
-export default connect(mapStateToProps, {loginThunk})(Login);
+export default Login;
