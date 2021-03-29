@@ -9,6 +9,7 @@ import FriendContainer from "./components/Friends/FriendContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Login from "./components/Login/Login";
 import Header from "./components/Header/Header";
+import {Redirect} from "react-router";
 
 const App = (props) => {
     return (
@@ -29,6 +30,9 @@ const App = (props) => {
                     <Route path="/Music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
                     <Route path="/login" component={Login}/>
+                    <Route exact path="/">
+                        <Redirect to="/profile/:userId"/>
+                    </Route>
                 </div>
             </div>
         </BrowserRouter>

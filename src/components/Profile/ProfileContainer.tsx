@@ -16,7 +16,6 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {RootState} from "../../redux/redux-store";
 import {postsItemType, profileInfodataType} from "../../types/mainTypes";
 
-
 type PropsType = {
     profileInfodata: profileInfodataType
     isFEtching: boolean
@@ -32,8 +31,6 @@ type PropsType = {
     updateAvatar: () => void
     setMyStatus: () => void
     updateMyInfo: () => void
-
-
 }
 
 class ProfileComponent extends Component<PropsType> {
@@ -41,13 +38,14 @@ class ProfileComponent extends Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = this.props.loginid;
         }
         this.props.setProfileInfo(userId);
         this.props.setProfileStatus(userId);
     }
 
     componentDidUpdate(prevProps: PropsType) {
+        debugger
         // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.profileInfodata.photos.small !== prevProps.profileInfodata.photos.small) {
             let userId = this.props.match.params.userId;
