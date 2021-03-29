@@ -21,10 +21,7 @@ const App = (props) => {
                     <Route path="/dialogs"
                            render={() => <DialogsContainer store={props.store}
                            />}/>
-                    <Route path="/profile/:userId"
-                           render={() => <ProfileContainer store={props.store}/>
-                           }/>
-                    <Route exact path="/profile/"
+                    <Route path="/profile/:userId?"
                            render={() => <ProfileContainer store={props.store}/>
                            }/>
                     <Route path="/friends"
