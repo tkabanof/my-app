@@ -24,6 +24,9 @@ const App = (props) => {
                     <Route path="/profile/:userId"
                            render={() => <ProfileContainer store={props.store}/>
                            }/>
+                    <Route exact path="/profile/"
+                           render={() => <ProfileContainer store={props.store}/>
+                           }/>
                     <Route path="/friends"
                            render={() => <FriendContainer store={props.store}/>}/>
                     <Route path="/news" component={News}/>
@@ -31,7 +34,7 @@ const App = (props) => {
                     <Route path="/settings" component={Settings}/>
                     <Route path="/login" component={Login}/>
                     <Route exact path="/">
-                        <Redirect to="/profile/:userId"/>
+                        <Redirect to="/profile"/>
                     </Route>
                 </div>
             </div>

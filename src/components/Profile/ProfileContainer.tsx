@@ -45,7 +45,6 @@ class ProfileComponent extends Component<PropsType> {
     }
 
     componentDidUpdate(prevProps: PropsType) {
-        debugger
         // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.profileInfodata.photos.small !== prevProps.profileInfodata.photos.small) {
             let userId = this.props.match.params.userId;
