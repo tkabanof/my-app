@@ -20,7 +20,7 @@ type PropsType = {
     followInProcess: Array<number>
     items: Array<userItemType>
     setCurrentPage: (pageNum: number) => void
-    getUsers: (pageNum: number, pageSize: number) => void
+    getUsers: (pageNum: number, pageSize: number, term?: string, friend?: boolean) => void
     setFollowInProcess: () => void
     follow: ()=> void
     unFollow: ()=> void
@@ -50,6 +50,7 @@ class FriendsComponent extends Component<PropsType> {
                 unFollow={this.props.unFollow}
                 onPageChanged={this.onPageChanged}
                 followInProcess={this.props.followInProcess}
+                pageSize = {this.props.pageSize}
             />
         </>
     }

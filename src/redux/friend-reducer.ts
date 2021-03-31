@@ -93,9 +93,9 @@ export const setUsersTotalCount = (totalCount: number) => {
     }
 }
 //Санки ===========================================================
-export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: any) => {
+export const getUsers = (currentPage: number, pageSize: number, term?: string | undefined, friend?: boolean | undefined) => async (dispatch: any) => {
     dispatch(setIsFEtching(true));
-    let response = await userAPI.getFriends(currentPage, pageSize)
+    let response = await userAPI.getFriends(currentPage, pageSize, term, friend)
     dispatch(setIsFEtching(false));
     dispatch(setFriends(response.data.items));
     dispatch(setUsersTotalCount(response.data.totalCount));
