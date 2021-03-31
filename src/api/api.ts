@@ -9,7 +9,7 @@ const instanceAPI = axios.create({
 });
 
 export const userAPI = {
-    getFriends(currentPage = 1, pageSize = 10, term: string | null = null, friend: boolean | null = null) {
+    getFriends(currentPage: number = 1, pageSize: number = 10, term: string | null = null, friend: boolean | null = null) {
 
         const params = new URLSearchParams({
             page: String(currentPage),
