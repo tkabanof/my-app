@@ -18,6 +18,7 @@ let initialStore =
         isFEtching: false,
         followInProcess: [] as Array<number>
     }
+
 type initialStoreType = typeof initialStore
 
 const FriendReducer = (state = initialStore, action: any): initialStoreType => {
