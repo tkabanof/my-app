@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
 const instanceAPI = axios.create({
     withCredentials: true,
@@ -9,30 +9,37 @@ const instanceAPI = axios.create({
 });
 
 export const userAPI = {
-    getFriends(currentPage = 1, pageSize = 10) {
-        const params = new URLSearchParams([['page', currentPage], ['count', pageSize]]);
+    getFriends(currentPage = 1, pageSize = 10, term: string | null = null, friend: boolean | null = null) {
+
+        const params = new URLSearchParams({
+            page: String(currentPage),
+            count: String(pageSize)
+        });
+        if (term !== null)  params.append('term', String(term))
+        if (friend !== null)  params.append('friend', String(friend))
+
         // return instanceAPI.get(`users?page=${currentPage}&count=${pageSize}`, {})
         return instanceAPI.get('users', {params})
     },
-    follow(userid) {
+    follow(userid: number) {
         return instanceAPI.post(`follow/${userid}`)
     },
-    unfollow(userid) {
+    unfollow(userid: number) {
         return instanceAPI.delete(`follow/${userid}`)
     },
-    getUserProfileData(userid) {
+    getUserProfileData(userid: number) {
         return instanceAPI.get(`profile/` + userid)
     },
-    getUserStatus(userid) {
+    getUserStatus(userid: number) {
         return instanceAPI.get(`profile/status/` + userid)
     },
-    setMeStatus(statusText) {
+    setMeStatus(statusText: string) {
         return instanceAPI.put(`profile/status`, {status: statusText})
     },
-    setMyInfo(myInfo) {
+    setMyInfo(myInfo: any) {
         return instanceAPI.put(`profile`, myInfo)
     },
-    setMyAvatar(photo) {
+    setMyAvatar(photo: any) {
         let formData = new FormData();
         formData.append("image", photo)
         return instanceAPI.put(`profile/photo`, formData, {
@@ -43,7 +50,7 @@ export const userAPI = {
     }
 }
 export const authAPI = {
-    login(email, password, rememberMe) {
+    login(email: string, password: string, rememberMe: boolean) {
         return instanceAPI.post('/auth/login', {
             email: email,
             password: password,
