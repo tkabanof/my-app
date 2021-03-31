@@ -1,7 +1,7 @@
 import {Form, Input, Button, Checkbox} from 'antd';
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/authSlice";
-import 'antd/dist/antd.css';
+//import 'antd/dist/antd.css';
 
 const layout = {
     labelCol: {span: 8},

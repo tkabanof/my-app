@@ -10,7 +10,9 @@ const instanceAPI = axios.create({
 
 export const userAPI = {
     getFriends(currentPage = 1, pageSize = 10) {
-        return instanceAPI.get(`users?page=${currentPage}&count=${pageSize}`, {})
+        const params = new URLSearchParams([['page', currentPage], ['count', pageSize]]);
+        // return instanceAPI.get(`users?page=${currentPage}&count=${pageSize}`, {})
+        return instanceAPI.get('users', {params})
     },
     follow(userid) {
         return instanceAPI.post(`follow/${userid}`)
