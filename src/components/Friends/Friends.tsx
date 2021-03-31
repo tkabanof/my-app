@@ -30,7 +30,6 @@ let Friends: FC<Props> = (props) => {
     let friendItem = props.items.map(m => <User key={m.id}
                                                 userid={m.id}
                                                 name={m.name}
-                                                birthday={"BIRTHDAY"}
                                                 avaLink={m.photos.small}
                                                 followed={m.followed}
                                                 follow={props.follow}

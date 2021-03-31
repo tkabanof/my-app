@@ -27,9 +27,6 @@ const User = (props) => {
                     </NavLink>
                 </div>
                 <div>
-                    {props.birthday}
-                </div>
-                <div>
                     ID:{props.userid}
                 </div>
             </div>
