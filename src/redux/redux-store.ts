@@ -1,10 +1,10 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-//import FriendReducer from "./friendSlice";
+import friendReducer from "./friendSlice";
 import {reducer as formReducer} from 'redux-form'
 import {Action, configureStore, getDefaultMiddleware, ThunkAction} from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
-import FriendReducer from "./friend-reducer";
+//import FriendReducer from "./friend-reducer.txt";
 
 
 const middleware = getDefaultMiddleware({
@@ -17,8 +17,8 @@ export const store = configureStore({
     reducer: {
         profile: profileReducer,
         dialogsState: dialogsReducer,
-        friends: FriendReducer,
-        //friend: FriendReducer,
+ //       friends: FriendReducer,
+        friend: friendReducer,
         auth: authReducer,
         form: formReducer
     },

@@ -1,4 +1,4 @@
-import FriendReducer, {followAC, setIsFEtching, unFollowAC} from "./friend-reducer";
+import FriendReducer, {followAC, setIsFEtching, unFollowAC} from "./friend-reducer.txt";
 
 let testState =
     {

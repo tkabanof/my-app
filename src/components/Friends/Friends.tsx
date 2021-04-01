@@ -2,61 +2,88 @@ import s from "./Friends.module.css"
 import Paginator from "../common/Paginator/Paginator";
 import User from "./FriendCard/User";
 import {userItemType} from "../../types/mainTypes";
-import {FC} from "react";
 import Search from "antd/lib/input/Search";
-import {useDispatch} from "react-redux";
-import {getUsers} from "../../redux/friend-reducer";
+import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
+import {
+    getUsers,
+    selectcurrentPage,
+    selectFrienditems,
+    selectpageSize,
+    selecttotalUserCount,
+    setCurrentPage
+} from "../../redux/friendSlice";
+import {useEffect, useState} from "react";
 
 
-type Props = {
-    items: Array<userItemType>
-    onPageChanged: (value: number) => void
-    followInProcess: Array<number>
-    totalUserCount: number
-    //setFollowInProcess: () => void
-    follow: ()=> void
-    unFollow: ()=> void
-    pageSize: number
+let Friends = () => {
 
-
-}
-
-let Friends: FC<Props> = (props) => {
+    const items = useSelector(selectFrienditems)
+    const pageSize = useSelector(selectpageSize)
+    const totalUserCount = useSelector(selecttotalUserCount)
+    const currentPage = useSelector(selectcurrentPage)
 
     const dispatch = useDispatch()
     const history = useHistory()
 
-    let friendItem = props.items.map(m => <User key={m.id}
-                                                userid={m.id}
-                                                name={m.name}
-                                                avaLink={m.photos.small}
-                                                followed={m.followed}
-                                                follow={props.follow}
-                                                unFollow={props.unFollow}
-                                                followInProcess={props.followInProcess}
-                                                //setFollowInProcess={props.setFollowInProcess}
+    const [term, setTerm] = useState<string>('')
+    const [isFriend, setIsFriend] = useState<string | null>(null)
+
+
+
+    useEffect(() => {
+        const searchParam = new URLSearchParams(history.location.search)
+        if (searchParam.has('term')) setTerm(String(searchParam.get('term')))
+        if (searchParam.has('friend')) setIsFriend(String(searchParam.get('friend')))
+        // if (searchParam.has('page')) dispatch(setCurrentPage(Number(searchParam.get('page'))));
+
+
+        dispatch(getUsers(currentPage, pageSize, term, isFriend))
+
+        const searchParamOut = new URLSearchParams()
+        searchParamOut.set('page', String(currentPage))
+        searchParamOut.set('friend', String(isFriend))
+        if (!!term) searchParamOut.set('term', String(term))
+
+        history.push({
+            pathname: history.location.pathname,
+            search: searchParamOut.toString(),
+        },)
+        debugger
+
+    }, [currentPage, pageSize, term, isFriend])
+
+    let friendItem = items.map(m => <User key={m.id}
+                                          userid={m.id}
+                                          name={m.name}
+                                          avaLink={m.photos.small}
+                                          followed={m.followed}
     />)
 
 
     const onSearch = (value: string) => {
-        console.log(value)
-        dispatch(getUsers(1, props.pageSize, value ))
-        const searchParam = new URLSearchParams(history.location.search)
-        searchParam.set('term', value)
-        history.push({
-            pathname: '/friends',
-            search: searchParam.toString(),
-        })
+        // dispatch(getUsers(1, pageSize, value))
+        setTerm(value)
+        // const searchParam = new URLSearchParams(history.location.search)
+        // searchParam.set('term', value)
+        // history.push({
+        //     pathname: '/friends',
+        //     search: searchParam.toString(),
+        // })
+    }
+    const onPageChanged = (pageNum: number) => {
+        //dispatch(setCurrentPage(pageNum));
+
     }
 
     return (
         <div>
-            <Search placeholder="input search text" onSearch={onSearch} enterButton />
-            <Paginator totalCount={props.totalUserCount}
-                       // pageSize={props.pageSize}
-                       // currentPage={props.currentPage}
-                       onPageChanged={props.onPageChanged}/>
+            <Search placeholder={term} onSearch={onSearch} enterButton/>
+            <Paginator
+                totalCount={totalUserCount}
+                onPageChanged={onPageChanged}
+                pageNum={currentPage}
+            />
             <div>
                 {friendItem}
             </div>

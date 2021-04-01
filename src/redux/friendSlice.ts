@@ -2,6 +2,7 @@ import {userItemType} from "../types/mainTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {userAPI} from "../api/api";
 import {AppThunk, RootState} from "./redux-store";
+import * as buffer from "buffer";
 
 interface initialStoreInterface {
     items: Array<userItemType>
@@ -10,8 +11,11 @@ interface initialStoreInterface {
     currentPage: number
     isFEtching: boolean
     followInProcess: Array<number>
+    term: string | null
+    isFriend: boolean | null
 
 }
+
 type followpprocess = {
     isFEtching: boolean,
     userId: number
@@ -24,7 +28,9 @@ let initialState: initialStoreInterface =
         totalUserCount: 10,
         currentPage: 1,
         isFEtching: false,
-        followInProcess: []
+        followInProcess: [],
+        term: null,
+        isFriend: null
     }
 
     export const friendSlice = createSlice({
@@ -62,7 +68,7 @@ let initialState: initialStoreInterface =
         }
     })
 
-export const getUsers = (currentPage: number, pageSize: number, term?: string | undefined, friend?: boolean | undefined): AppThunk => async dispatch => {
+export const getUsers = (currentPage: number, pageSize: number, term?: string | null, friend?: string | boolean | null): AppThunk => async dispatch => {
     dispatch(setIsFEtching(true));
     let response = await userAPI.getFriends(currentPage, pageSize, term, friend)
     dispatch(setIsFEtching(false));

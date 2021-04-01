@@ -14,31 +14,32 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
     totalCount: number
-    onPageChanged: (pageNum: number, term: string | undefined, friend?: boolean | undefined) => void
+    pageNum: number
+    onPageChanged: (pageNum: number) => void
 
 }
 
 const Paginator: FC<Props> = (props) => {
 
     const classes = useStyles();
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
 
-    const history = useHistory()
+    // const history = useHistory()
     const handleChange = (event: any, value: number) => {
-        setPage(value);
-        props.onPageChanged(value, '10');
+        // setPage(value);
+        props.onPageChanged(value);
 
-        const searchParam = new URLSearchParams(history.location.search)
-        searchParam.set('page', String(value))
-        history.push({
-            pathname: history.location.pathname,
-            search: searchParam.toString(),
-        })
+        // const searchParam = new URLSearchParams(history.location.search)
+        // searchParam.set('page', String(value))
+        // history.push({
+        //     pathname: history.location.pathname,
+        //     search: searchParam.toString(),
+        // })
     };
 
     return (
         <div className={classes.root}>
-            <Pagination count={Math.floor(props.totalCount / 20 + 1)} page={page} onChange={handleChange}/>
+            <Pagination count={Math.floor(props.totalCount / 20 + 1)} page={props.pageNum} onChange={handleChange}/>
         </div>
     );
 }

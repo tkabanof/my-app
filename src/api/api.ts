@@ -9,14 +9,14 @@ const instanceAPI = axios.create({
 });
 
 export const userAPI = {
-    getFriends(currentPage: number = 1, pageSize: number = 10, term: string | undefined, friend: boolean | undefined) {
+    getFriends(currentPage: number = 1, pageSize: number = 10, term: string | null | undefined, friend: boolean | null | undefined | string) {
 
         const params = new URLSearchParams({
             page: String(currentPage),
             count: String(pageSize)
         });
-        if (term !== undefined)  params.append('term', String(term))
-        if (friend !== undefined)  params.append('friend', String(friend))
+        if (term !== null && term !== undefined)  params.append('term', String(term))
+        if (friend !== null && term !== undefined)  params.append('friend', String(friend))
 
         // return instanceAPI.get(`users?page=${currentPage}&count=${pageSize}`, {})
         return instanceAPI.get('users', {params})
