@@ -11,9 +11,6 @@ interface initialStoreInterface {
     currentPage: number
     isFEtching: boolean
     followInProcess: Array<number>
-    term: string | null
-    isFriend: boolean | null
-
 }
 
 type followpprocess = {
@@ -29,8 +26,6 @@ let initialState: initialStoreInterface =
         currentPage: 1,
         isFEtching: false,
         followInProcess: [],
-        term: null,
-        isFriend: null
     }
 
     export const friendSlice = createSlice({

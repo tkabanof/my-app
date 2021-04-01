@@ -1,7 +1,6 @@
 import s from "./Friends.module.css"
 import Paginator from "../common/Paginator/Paginator";
 import User from "./FriendCard/User";
-import {userItemType} from "../../types/mainTypes";
 import Search from "antd/lib/input/Search";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
@@ -11,7 +10,7 @@ import {
     selectFrienditems,
     selectpageSize,
     selecttotalUserCount,
-    setCurrentPage
+    setCurrentPage,
 } from "../../redux/friendSlice";
 import {useEffect, useState} from "react";
 
@@ -30,13 +29,17 @@ let Friends = () => {
     const [isFriend, setIsFriend] = useState<string | null>(null)
 
 
-
-    useEffect(() => {
+    useEffect(()=> {
         const searchParam = new URLSearchParams(history.location.search)
-        if (searchParam.has('term')) setTerm(String(searchParam.get('term')))
-        if (searchParam.has('friend')) setIsFriend(String(searchParam.get('friend')))
-        // if (searchParam.has('page')) dispatch(setCurrentPage(Number(searchParam.get('page'))));
+        if (!!searchParam.toString()) {
+            if (searchParam.has('term')) setTerm(String(searchParam.get('term')))
+            if (searchParam.has('friend')) setIsFriend(String(searchParam.get('friend')))
+            if (searchParam.has('page')) dispatch(setCurrentPage(Number(searchParam.get('page'))));
 
+        }
+
+    },[])
+    useEffect(() => {
 
         dispatch(getUsers(currentPage, pageSize, term, isFriend))
 
@@ -49,7 +52,6 @@ let Friends = () => {
             pathname: history.location.pathname,
             search: searchParamOut.toString(),
         },)
-        debugger
 
     }, [currentPage, pageSize, term, isFriend])
 
@@ -72,13 +74,13 @@ let Friends = () => {
         // })
     }
     const onPageChanged = (pageNum: number) => {
-        //dispatch(setCurrentPage(pageNum));
+        dispatch(setCurrentPage(pageNum));
 
     }
 
     return (
         <div>
-            <Search placeholder={term} onSearch={onSearch} enterButton/>
+            <Search placeholder={'filter'} onSearch={onSearch} enterButton/>
             <Paginator
                 totalCount={totalUserCount}
                 onPageChanged={onPageChanged}
